@@ -6,12 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Poliklinik UM Hello</title>
+    <title>Poliklinik UM</title>
 
 
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
     <style type="text/css">
        .signup-section
  {
@@ -334,11 +334,12 @@
 <!-- Footer -->
 
     <!-- Javascript HERE -->
+    
     <!-- Jquery -->
-    <script src="vendor/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <!-- Popper JS -->
-    <script src="vendor/js/popper.min.js"></script>
+    <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="vendor/js/bootstrap.min.js"></script>
+    <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
 </body>
 </html>
