@@ -20,10 +20,10 @@
   -webkit-gradient(linear,left top,left bottom,from(rgba(22,22,22,.1)),
     color-stop(75%,rgba(22,22,22,.5)),
     to(#fff)),
-  url(img/img1.jpg);
+  url(asset/img/img1.jpg);
   background:linear-gradient(to left,rgba(22,22,22,0) 0,
     rgba(22,22,22,.5) 10%,#fff 77%),
-  url(img/img1.jpg);
+  url(asset/img/img1.jpg);
   background-position:center;
   background-repeat:no-repeat;
   background-attachment:scroll;
@@ -77,13 +77,13 @@
     <!-- The slideshow -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="img/img1.jpg" alt="">
+        <img src="asset/img/img1.jpg" alt="">
       </div>
       <div class="carousel-item">
-        <img src="img/img2.jpg" alt="">
+        <img src="asset/img/img2.jpg" alt="">
       </div>
       <div class="carousel-item">
-        <img src="img/img3.jpg" alt="">
+        <img src="asset/img/img3.jpg" alt="">
       </div>
     </div>
 
@@ -116,7 +116,7 @@
 
       <div class="row justify-content-center">
         <div class="col-lg-6">
-          <img class="img-fluid" src="img/img1.jpg" alt="">
+          <img class="img-fluid" src="asset/img/img1.jpg" alt="">
         </div>
         <div class="col-lg-6 order-lg-first">
           <div class="text-center h-100 project">
@@ -144,7 +144,7 @@
       <!-- Project One Row -->
       <div class="row justify-content-center mb-5 mb-lg-0">
         <div class="col-lg-6">
-          <img class="img-fluid" src="img/img1.jpg" alt="">
+          <img class="img-fluid" src="asset/img/img1.jpg" alt="">
         </div>
         <div class="col-lg-6">
           <div class="bg-black text-center h-100 project">
