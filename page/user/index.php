@@ -1,3 +1,5 @@
+
+<?php include "config/config.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="bootstrap.min.js"></script>
 </head>
@@ -97,5 +99,8 @@
             </form>
         </div>
     </section>
+    <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
+    <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
 </body>
 </html>
