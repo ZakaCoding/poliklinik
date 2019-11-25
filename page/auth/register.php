@@ -9,8 +9,6 @@
     $invalid_password = '';
     $invalid_confirmPassword = '';
 
-    var_dump($error['errorCode']);
-
     if($error != NULL)
     {
         // has error on form input
