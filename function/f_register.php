@@ -1,3 +1,220 @@
 <?php
+    // Start session
+    session_start();
     // get connection to database
     include_once "../config/config.php";
+
+    // if register button did not click
+    if(!isset($_POST['signup']))
+    {
+        // redirect back
+        header("location: " . BASE_URL . '/page/auth/register.php');
+        exit(); // Stop code
+    }
+
+    // Get all data request form register.php
+    $name  = $mysqli->real_escape_string($_POST['name']);
+    $nim  = $mysqli->real_escape_string($_POST['nim']);
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $password = $mysqli->real_escape_string($_POST['password']);
+    $confirmPassword = $mysqli->real_escape_string($_POST['confirmPassword']);
+
+    /**
+     * Error handling with session flash data
+     */
+    function errorHandling($errCode = [''], $message)
+    {
+        global $name, $nim, $email;
+
+        $error = [
+            "errorCode" => $errCode,
+            "message" => $message
+        ];
+
+        // create temp data if any error
+        $request = [
+            "name" => $name,
+            "nim" => $nim,
+            "email" => $email
+        ];
+
+        // create session error
+        $_SESSION['data'] = $request;
+        $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
+
+        return header('location:' . BASE_URL . '/page/auth/register.php');
+    }
+
+
+    /**
+     * Error exceptipon handling
+     * if any error, system throw error and
+     * redirect back with flash message
+     */
+    $message = '';
+    
+    // Check form name
+    function throwError()
+    {
+        $errorCode = array('');
+        if(empty($name))
+        {
+            $message = "The name field is required.";
+            array_push($errorCode,"ERR_EMPTY_NAME");
+        }
+        else
+        {
+            /**
+             * Only letter and spacing are allowed
+             */
+            if(!preg_match("/^[a-zA-Z_-\s]*$/",$name))
+            {
+                $message = "This field can only be filled with the alphabet excluding numbers or characters.";
+                $errorCode = "ERR_INVALID_NAME";
+            }
+        }
+
+        if(empty($nim))
+        {
+            $message = "The nim field is required.";
+            array_push($errorCode,"ERR_EMPTY_NIM");
+        }
+        else
+        {
+            if(!preg_match("/^[0-9]*$/",$nim))
+            {
+                $message = "This field only number.";
+                $errorCode = "ERR_INVALID_NIM";
+            }
+        }
+
+        return errorHandling($errorCode,$message);
+    }
+
+    // execute
+    throwError();
+    exit();
+
+    // try {
+    //     // Check form name
+    //     if(empty($name))
+    //     {
+    //         $message = "The name field is required.";
+    //         throw new Exception("ERR_EMPTY_NAME");
+    //     }
+    //     else
+    //     {
+    //         /**
+    //          * Only letter and spacing are allowed
+    //          */
+    //         if(!preg_match("/^[a-zA-Z_-\s]*$/",$name))
+    //         {
+    //             $message = "This field can only be filled with the alphabet excluding numbers or characters.";
+    //             throw new Exception("ERR_INVALID_NAME");
+    //         }
+    //     }
+
+    //     // Check form NIM
+    //     if(empty($nim))
+    //     {
+    //         $message = "The nim field is required.";
+    //         throw new Exception("ERR_EMPTY_NIM");
+    //     }
+    //     else
+    //     {
+    //         if(!preg_match("/^[0-9]*$/",$nim))
+    //         {
+    //             $message = "This field only number.";
+    //             throw new Exception("ERR_INVALID_NIM");
+    //         }
+    //     }
+
+    //     // Check form email
+    //     if(empty($email))
+    //     {
+    //         $message = "The name field is required.";
+    //         throw new Exception("ERR_EMPTY_EMAIL");
+    //     }
+    //     else
+    //     {
+    //         /**
+    //          * validate email format
+    //          */
+    //         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+    //         {
+    //             $message = "Invalid email format";
+    //             throw new Exception("ERR_INVALID_EMAIL");
+    //         }
+    //         else
+    //         {
+    //             /**
+    //              * check email is not exist
+    //              * email unique any user just can use 1 email for 1 account
+    //              */
+    //             $result = $mysqli->query("SELECT `email` FROM `users` WHERE `email` = $email LIMIT 1");
+    //             if($result->num_rows == 1)
+    //             {
+    //                 $message = "Email already exists. if you have account before you can login";
+    //                 throw new Exception("ERR_EMAIL_EXISTS");
+    //             }
+    //         }
+    //     }
+
+    //     // Check form password and confirm
+    //     if(empty($password) || empty($confirmPassword))
+    //     {
+    //         $message = "This field is required.";
+    //         throw new Exception("ERR_PWD_EMPTY");
+    //     }
+    //     else
+    //     {
+    //         // check password min length 8 and inlcude string,number,character
+    //         if(strlen($password) < 8)
+    //         {
+    //             $message = "Password min 8 length and with Number and character";
+    //             throw new Exception("WARNING_PASSWORD_LIMIT");
+    //         }
+    //         // Check password and confirm is match
+    //         if($password != $confirmPassword)
+    //         {
+    //             $message = "Your typing password is not match";
+    //             throw new Exception("ERR_PASSWORD_MISMATCH");
+    //         }
+    //     }
+
+    // } catch (Exception $e) {
+    //     errorHandling($e->getMessage(),$message);
+    // }
+
+    /**
+     * this new line for :
+     * 
+     * --> create token for secure login system
+     * 
+     * --> create password hash
+     * 
+     * --> Store data to database
+     * 
+     * --> sent email to user for confirm their account
+     */
+    
+    // Create Token
+    $token  = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+    $token  = str_shuffle($token);
+    $token  = substr($token,0,32);
+    
+    // Hash password
+    $pwd = password_hash($password,PASSWORD_DEFAULT);
+    
+    // Store to database
+    $query = "INSERT INTO `users` (`name`,`nim`,`email`,`password`,`remember_token`,`created_at`,`updated_at`) VALUES(".
+    $values .= "'$name', $nim, '$email', '$pwd', '$token', NOW(), NOW())";
+
+    if($mysqli->query($query))
+    {
+        echo "Success";
+    }
+    else
+    {
+        echo "failed " . $mysqli->error;
+    }
