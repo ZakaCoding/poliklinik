@@ -12,7 +12,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link href="asset/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
     <style type="text/css">
+      i {
+        color: black
+      }
+
        .signup-section
  {
   padding:10rem 0;
@@ -21,8 +29,8 @@
     color-stop(75%,rgba(22,22,22,.5)),
     to(#fff)),
   url(asset/img/img1.jpg);
-  background:linear-gradient(to left,rgba(22,22,22,0) 0,
-    rgba(22,22,22,.5) 10%,#fff 77%),
+  background:linear-gradient(to left,rgba(22,22,22,.1) 0,
+    rgba(22,22,22,.5) 10%,#fff 55%),
   url(asset/img/img1.jpg);
   background-position:center;
   background-repeat:no-repeat;
@@ -43,16 +51,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="#">Services</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="#">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
+              <a class="nav-link" href="#">Help</a>
             </li>
             <!-- <li class="nav-item">
               <a class="nav-link disabled" href="#">Disabled</a>
@@ -68,7 +76,7 @@
 
   <div id="demo" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ul class="carousel-indicators" style="padding-bottom: 200px">
+    <ul class="carousel-indicators" style="padding-bottom: 80px">
       <li data-target="#demo" data-slide-to="0" class="active"></li>
       <li data-target="#demo" data-slide-to="1"></li>
       <li data-target="#demo" data-slide-to="2"></li>
@@ -77,37 +85,53 @@
     <!-- The slideshow -->
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="asset/img/img1.jpg" alt="">
+        <img src="asset/img/img1.jpg" style="width: 100%;
+  height: auto" alt="">
       </div>
       <div class="carousel-item">
-        <img src="asset/img/img2.jpg" alt="">
+        <img src="asset/img/img2.jpg" style="width: 100%;
+  height: auto" alt="">
       </div>
       <div class="carousel-item">
-        <img src="asset/img/img3.jpg" alt="">
+        <img src="asset/img/img3.jpg" style="width: 100%;
+  height: auto" alt="">
       </div>
     </div>
 
   <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev" style="padding-bottom: 10%">
+  <a class="carousel-control-prev" href="#demo" role="button" data-slide="prev" style="padding-bottom: 5%">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
   </a>
-  <a class="carousel-control-next" href="#demo" role="button" data-slide="next" style="padding-bottom: 10%">
+  <a class="carousel-control-next" href="#demo" role="button" data-slide="next" style="padding-bottom: 5%">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
   </a>
 </div>
 
-  <div class="container" style="position: relative; bottom: 200px; padding-right: 5%; padding-left: 5%">
+  <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white">
     <div class="bg-primary text-white text-center" style="border-radius: 5px">
-      <br/>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <h4>Contoh container</h4>
-      <br/>
+      <div class="row" style="background-color: white; color: black">
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <i class="fas fa-4x fa-seedling mb-4"></i>
+            <h3 class="h4 mb-2">Clean</h3>
+            <p class="text-muted mb-0">Selalu berupaya menciptakan lingkungan yang bersih agar terhindar dari berbagai penyakit.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <i class="fas fa-4x fa-briefcase-medical mb-4"></i>
+            <h3 class="h4 mb-2">Healthy</h3>
+            <p class="text-muted mb-0">Kesehatan warga UM menjadi fokus utama, baik kesehatan fisik maupun psikis.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <i class="fas fa-4x fa-heart mb-4"></i>
+            <h3 class="h4 mb-2">Love</h3>
+            <p class="text-muted mb-0">Selalu berupaya memberikan pelayanan yang terbaik dengan sepenuh hati dan cinta.</p>
+          </div>
+        </div>
+      </div>
     </div>
  
     <br><br><br><br>
@@ -122,8 +146,8 @@
           <div class="text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">Mountains</h4>
-                <p class="mb-0 text-black-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                <h4 class="text-black">People's Talk</h4>
+                <p class="mb-0 text-black-50">Pelayanan sangat baik dan cepat. Tempatnya juga bersih. Tidak ada biaya bagi warga UM. Namun, harus memiliki kartu anggota terlebih dahulu sebelum berobat. </p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>
@@ -135,7 +159,8 @@
 
       <div class="container" style="width: 50%">
         <div class=" text-center">
-          <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h2>
+          <h2>Happiness is the highest form of health.</h2>
+          <p>- Dalai Lama -</p>
         </div>
       </div>
 
@@ -150,8 +175,8 @@
           <div class="bg-black text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">Misty</h4>
-                <p class="mb-0 text-black-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                <h4 class="text-black">The Doctor</h4>
+                <p class="mb-0 text-black-50">"Kami selalu berupaya dalam memberikan pelayanan terbaik bagi masyarakat, baik dalam pemeriksaan maupun perawatan. Sejak lama, kesehatan masyarakat menjadi tujuan utama kami. Karena seperti kata pepatah, 'Mens sana in corpore sano.'"</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
             </div>
@@ -171,8 +196,8 @@
           <div class="text-center h-100">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">Mountains</h4>
-                <p class="mb-0 text-black-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                <h4 class="text-black">About Poliklinik UM</h4>
+                <p class="mb-0 text-black-50">Poliklinik UM merupakan salah satu fasilitas yang ada di Universitas Negeri Malang yang bergerak di bidang kesehatan. Fasilitas ini dapat diakses oleh seluruh warga UM secara gratis tanpa dipungut biaya apapun. Poliklinik dapat ditemukan di sebelah utara Graha Rektorat UM.</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
             </div>
@@ -188,30 +213,27 @@
 
       <div class="container" style="width: 50%">
         <div class=" text-center">
-          <h3>Sign up today</h3>
-          <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.</p>
-          <button class="btn btn-success">Get Started</button>
+          <h3>Register Now</h3>
+          <p>Daftar terlebih dahulu untuk mendapatkan kartu anggota dan melakukan reservasi secara online!</p>
+          <button class="btn" style="background-color: black; color: white">Register</button>
         </div>
       </div>
 
       <br><br><br>
 
       <!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4">
+<footer class="page-footer font-small mdb-color pt-4 bg-dark">
 
   <!-- Footer Links -->
-  <div class="container text-center text-md-left">
+  <div class="container text-center text-md-left text-white">
 
     <!-- Footer links -->
     <div class="row text-center text-md-left mt-3 pb-3">
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
-        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-          consectetur
-          adipisicing elit.</p>
+        <h6 class="text-uppercase mb-4 font-weight-bold">Poliklinik UM</h6>
+        <p>Poliklinik UM merupakan salah satu fasilitas yang ada di Universitas Negeri Malang yang bergerak di bidang kesehatan.</p>
       </div>
       <!-- Grid column -->
 
@@ -219,19 +241,14 @@
 
       <!-- Grid column -->
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">Facility</h6>
         <p>
-          <a href="#!">MDBootstrap</a>
+          <a href="#!">Services</a>
         </p>
         <p>
-          <a href="#!">MDWordPress</a>
+          <a href="#!">Help</a>
         </p>
-        <p>
-          <a href="#!">BrandFlow</a>
-        </p>
-        <p>
-          <a href="#!">Bootstrap Angular</a>
-        </p>
+        
       </div>
       <!-- Grid column -->
 
@@ -239,19 +256,14 @@
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">links</h6>
         <p>
-          <a href="#!">Your Account</a>
+          <a href="#!">Register</a>
         </p>
         <p>
-          <a href="#!">Become an Affiliate</a>
+          <a href="#!">Login</a>
         </p>
-        <p>
-          <a href="#!">Shipping Rates</a>
-        </p>
-        <p>
-          <a href="#!">Help</a>
-        </p>
+        
       </div>
 
       <!-- Grid column -->
@@ -261,20 +273,19 @@
       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
         <p>
-          <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
+          <i class="fas fa-home mr-3"></i> Jl. Semarang 5, Malang</p>
         <p>
-          <i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
+          <i class="fas fa-envelope mr-3"></i> poliklinik@um.ac.id</p>
         <p>
           <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-        <p>
-          <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+        
       </div>
       <!-- Grid column -->
 
     </div>
     <!-- Footer links -->
 
-    <hr>
+    <hr style="background-color: grey">
 
     <!-- Grid row -->
     <div class="row d-flex align-items-center">
@@ -283,9 +294,9 @@
       <div class="col-md-7 col-lg-8">
 
         <!--Copyright-->
-        <p class="text-center text-md-left">© 2018 Copyright:
-          <a href="https://mdbootstrap.com/education/bootstrap/">
-            <strong> MDBootstrap.com</strong>
+        <p class="text-center text-md-left">© 2019 Copyright:
+          <a>
+            <strong> Poliklinik UM</strong>
           </a>
         </p>
 
