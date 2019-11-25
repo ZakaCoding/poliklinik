@@ -52,15 +52,13 @@
      * redirect back with flash message
      */
     $message = '';
-    
-    // Check form name
-    function throwError()
-    {
-        $errorCode = array('');
+
+    try {
+        // Check form name
         if(empty($name))
         {
             $message = "The name field is required.";
-            array_push($errorCode,"ERR_EMPTY_NAME");
+            throw new Exception("ERR_EMPTY_NAME");
         }
         else
         {
@@ -70,121 +68,81 @@
             if(!preg_match("/^[a-zA-Z_-\s]*$/",$name))
             {
                 $message = "This field can only be filled with the alphabet excluding numbers or characters.";
-                $errorCode = "ERR_INVALID_NAME";
+                throw new Exception("ERR_INVALID_NAME");
             }
         }
 
+        // Check form NIM
         if(empty($nim))
         {
             $message = "The nim field is required.";
-            array_push($errorCode,"ERR_EMPTY_NIM");
+            throw new Exception("ERR_EMPTY_NIM");
         }
         else
         {
             if(!preg_match("/^[0-9]*$/",$nim))
             {
                 $message = "This field only number.";
-                $errorCode = "ERR_INVALID_NIM";
+                throw new Exception("ERR_INVALID_NIM");
             }
         }
 
-        return errorHandling($errorCode,$message);
+        // Check form email
+        if(empty($email))
+        {
+            $message = "The name field is required.";
+            throw new Exception("ERR_EMPTY_EMAIL");
+        }
+        else
+        {
+            /**
+             * validate email format
+             */
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                $message = "Invalid email format";
+                throw new Exception("ERR_INVALID_EMAIL");
+            }
+            else
+            {
+                /**
+                 * check email is not exist
+                 * email unique any user just can use 1 email for 1 account
+                 */
+                $result = $mysqli->query("SELECT `email` FROM `users` WHERE `email` = $email LIMIT 1");
+                if($result->num_rows == 1)
+                {
+                    $message = "Email already exists. if you have account before you can login";
+                    throw new Exception("ERR_EMAIL_EXISTS");
+                }
+            }
+        }
+
+        // Check form password and confirm
+        if(empty($password) || empty($confirmPassword))
+        {
+            $message = "This field is required.";
+            throw new Exception("ERR_PWD_EMPTY");
+        }
+        else
+        {
+            // check password min length 8 and inlcude string,number,character
+            if(strlen($password) < 8)
+            {
+                $message = "Password min 8 length and with Number and character";
+                throw new Exception("WARNING_PASSWORD_LIMIT");
+            }
+            // Check password and confirm is match
+            if($password != $confirmPassword)
+            {
+                $message = "Your typing password is not match";
+                throw new Exception("ERR_PASSWORD_MISMATCH");
+            }
+        }
+
+    } catch (Exception $e) {
+        errorHandling($e->getMessage(),$message);
     }
-
-    // execute
-    throwError();
-    exit();
-
-    // try {
-    //     // Check form name
-    //     if(empty($name))
-    //     {
-    //         $message = "The name field is required.";
-    //         throw new Exception("ERR_EMPTY_NAME");
-    //     }
-    //     else
-    //     {
-    //         /**
-    //          * Only letter and spacing are allowed
-    //          */
-    //         if(!preg_match("/^[a-zA-Z_-\s]*$/",$name))
-    //         {
-    //             $message = "This field can only be filled with the alphabet excluding numbers or characters.";
-    //             throw new Exception("ERR_INVALID_NAME");
-    //         }
-    //     }
-
-    //     // Check form NIM
-    //     if(empty($nim))
-    //     {
-    //         $message = "The nim field is required.";
-    //         throw new Exception("ERR_EMPTY_NIM");
-    //     }
-    //     else
-    //     {
-    //         if(!preg_match("/^[0-9]*$/",$nim))
-    //         {
-    //             $message = "This field only number.";
-    //             throw new Exception("ERR_INVALID_NIM");
-    //         }
-    //     }
-
-    //     // Check form email
-    //     if(empty($email))
-    //     {
-    //         $message = "The name field is required.";
-    //         throw new Exception("ERR_EMPTY_EMAIL");
-    //     }
-    //     else
-    //     {
-    //         /**
-    //          * validate email format
-    //          */
-    //         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-    //         {
-    //             $message = "Invalid email format";
-    //             throw new Exception("ERR_INVALID_EMAIL");
-    //         }
-    //         else
-    //         {
-    //             /**
-    //              * check email is not exist
-    //              * email unique any user just can use 1 email for 1 account
-    //              */
-    //             $result = $mysqli->query("SELECT `email` FROM `users` WHERE `email` = $email LIMIT 1");
-    //             if($result->num_rows == 1)
-    //             {
-    //                 $message = "Email already exists. if you have account before you can login";
-    //                 throw new Exception("ERR_EMAIL_EXISTS");
-    //             }
-    //         }
-    //     }
-
-    //     // Check form password and confirm
-    //     if(empty($password) || empty($confirmPassword))
-    //     {
-    //         $message = "This field is required.";
-    //         throw new Exception("ERR_PWD_EMPTY");
-    //     }
-    //     else
-    //     {
-    //         // check password min length 8 and inlcude string,number,character
-    //         if(strlen($password) < 8)
-    //         {
-    //             $message = "Password min 8 length and with Number and character";
-    //             throw new Exception("WARNING_PASSWORD_LIMIT");
-    //         }
-    //         // Check password and confirm is match
-    //         if($password != $confirmPassword)
-    //         {
-    //             $message = "Your typing password is not match";
-    //             throw new Exception("ERR_PASSWORD_MISMATCH");
-    //         }
-    //     }
-
-    // } catch (Exception $e) {
-    //     errorHandling($e->getMessage(),$message);
-    // }
 
     /**
      * this new line for :
