@@ -11,93 +11,161 @@
     <script src="jquery-3.3.1.slim.min.js"></script>
     <script src="bootstrap.min.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">Poliklinik</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-                </li>
-                <!-- <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-                </li> -->
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-                <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" type="submit">Login</button>
-            </form>
-            </div>
-        </nav>
-    </header>
-    <section>
-        <div>
-            <div class="bg-blur"></div>
-            <div class="bg-text">
-                <h1>Halaman Edit</h1>
-            </div>
-        </div>
+<body class="bg-whatever roboto-regular">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <form action="">
-                <div class="container">
-                    <h1>Edit Profile</h1>
-                    <p>Please fill in this form to create an account.</p>
-                    <hr>
-    
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
-    
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-    
-                    <label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                    <hr>
-    
-                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    <button type="submit" class="registerbtn">Register</button>
-                </div>
-    
-                <div class="container signin">
-                    <p>Already have an account? <a href="#">Sign in</a>.</p>
-                </div>
-            </form>
-            <form action="">
-                <div class="container">
-                    <h1>Edit Reservasi</h1>
-                    <p>Please fill in this form to create an account.</p>
-                    <hr>
-            
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
-            
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" required>
-            
-                    <label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                    <hr>
-            
-                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    <button type="submit" class="registerbtn">Register</button>
-                </div>
-            </form>
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
         </div>
-    </section>
+    </nav>
+
+    <!-- Main -->
+    <div class="container roboto-light text-otherblue">
+        <div class="row p-4">
+            <div class="col bg-white border-rounded-md  p-3">
+                <h4 class="form-title">Update Your Name or Email</h4>
+                <hr>
+                <!-- spacer -->
+                <div class="p-2"></div>
+                <form action="" method="post">
+                    <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control border-softblue" name="name" id="inputName">
+                        </div>
+                    </div>
+                    <!-- spacer -->
+                    <div class="p-2"></div>
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="name" id="inputEmail">
+                            <small id="emailHelp" class="form-text text-muted">    
+                            * Change with your active email and dont forget to verification.
+                            </small>
+                        </div>
+                    </div>
+                    <!-- spacer -->
+                    <div class="p-2"></div>
+                    <div class="clearfix">
+                        <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+            <div class="p-2"></div>
+            <div class="col bg-white border-rounded-md  p-3">
+                <h4 class="form-title">Manage Your Social Login</h4>
+                <hr>
+                <!-- spacer -->
+                <div class="p-2"></div>
+                <p>Enable or disable login to User page from your social login.</p>
+                <div class="p-2"></div>
+                <div class="clearfix">
+                    <div class="float-left">
+                        <div class="media">
+                            <img src="<?= BASE_URL ?>asset/img/google.png" class="mr-3 logo-small" alt="...">
+                            <div class="media-body p-1 align-middle">
+                                Connect Google Account
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <a href="" class="btn btn-outline-primary">Connect</a>
+                    </div>
+                </div>
+                <div class="p-2"></div>
+                <div class="clearfix">
+                    <div class="float-left">
+                        <div class="media">
+                            <img src="<?= BASE_URL ?>asset/img/facebook.png" class="mr-3 logo-small" alt="...">
+                            <div class="media-body p-1 align-middle">
+                                Connect Facebook Account
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float-right">
+                        <a href="" class="btn btn-outline-primary">Connect</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 p-2"></div>
+            <div class="col bg-white border-rounded-md  p-3">
+                <h4 class="form-title">Update Your Password</h4>
+                <hr>
+                <!-- spacer -->
+                <div class="p-2"></div>
+                <form action="" method="post">
+                    <div class="form-group row">
+                        <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent">
+                        </div>
+                    </div>
+                    <!-- spacer -->
+                    <div class="p-2"></div>
+                    <div class="form-group row">
+                        <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="newPassword" id="inputNew">
+                            <small id="passwordHelp" class="form-text text-muted">    
+                                * Make sure it's at least 8 characters including a number and a lowercase letter.
+                            </small>
+                        </div>
+                    </div>
+                    <!-- spacer -->
+                    <div class="p-2"></div>
+                    <div class="form-group row">
+                        <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm">
+                        </div>
+                    </div>
+                    <!-- spacer -->
+                    <div class="p-2"></div>
+                    <div class="clearfix">
+                        <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+            <div class="p-2"></div>
+            <div class="col bg-white border-rounded-md  p-3">Column</div>
+        </div>
+    </div>
+
+
+   <!-- Javascript -->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
