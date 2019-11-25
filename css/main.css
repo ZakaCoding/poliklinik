@@ -4,6 +4,31 @@
 * Use this main.css for styling this website
 *
 */
+
+@font-face {
+  font-family: 'Roboto Thin';
+  src: url('../asset/font/Roboto-Thin.ttf');
+}
+@font-face {
+  font-family: 'Roboto Regular';
+  src: url('../asset/font/Roboto-Regular.ttf');
+}
+@font-face {
+  font-family: 'Roboto Light';
+  src: url('../asset/font/Roboto-Light.ttf');
+}
+
+/* Import font */
+.roboto-thin {
+  font-family: 'Roboto Thin';
+}
+.roboto-regular {
+  font-family: 'Roboto Regular';
+}
+.roboto-light {
+  font-family: 'Roboto Light';
+}
+
 .bg-blur {
     /* The image used */
     background-image: "rumah_sakit.jpg";
@@ -40,4 +65,62 @@
     padding: 20px;
     text-align: center;
   }
-  
+
+
+/* styling login and register page */
+.wrapper {
+  background-color: #2E3192;
+  /* width: 100%; */
+  margin: 2% auto;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.logo {
+  max-width: 300px;
+  display: block;
+  margin:10% auto;
+}
+/* END login register */
+
+/**
+*  Helper 
+*  this css for helper like create background color or another
+*/
+.bg-midblue {
+  background-color: #2E3192;
+}
+.text-softblack {
+  color: #5e5e5e;
+}
+.text-otherblue {
+  color: #466C84 !important;
+}
+.border-rounded-md {
+  border-radius: 10px;
+}
+.h-m100 {
+  min-height: 100px;
+}
+.bg-whatever {
+  background-color: #F0F4F7;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.border-softblue {
+  border: 1px solid #d2e8f8;
+}
+.logo-small {
+  width: 32px;
+}
+
+/**
+/ Styling User page
+*/
+.form-title {
+  font-size: 16pt;
+  font-family: 'Roboto Light';
+}
+
