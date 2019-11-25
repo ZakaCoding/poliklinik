@@ -1,4 +1,9 @@
 <?php
+    // Import PHPMailer classes into the global namespace
+    // These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
     // Start session
     session_start();
     // get connection to database
@@ -170,7 +175,74 @@
 
     if($mysqli->query($query))
     {
-        echo "Success";
+        /**
+         * if data has been sent to database
+         * next system will sent confirmation code for 
+         * activated users account
+         * if user not click email confirmation
+         * then that account cant be use
+         */
+
+        // Load composer Autoloader
+        require '../vendor/autoload.php';
+        // make object for PHPMailer
+        $mail = new PHPMailer(true);
+
+        // Setting config file for send email
+        $mail->isSMTP(true);
+        $mail->SMTPDebug = false;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        // This secret data
+        // dont share username or password to everyone
+        // Only share for Developer this website
+        $mail->Username = 'toor.env@gmail.com';
+        $mail->Password = 'kze-j8sgg-7cd81f88';
+        $mail->SMTPSecure = 'ssl';
+        $mail->port = 465;
+
+        // Receipments
+        $mail->setFrom('toor.env@gmail.com', 'Developer');
+        $mail->addAddress($email,$name);
+
+        // Content sent
+        $link = BASE_URL . 'page/verify-account.php?email='.$email.'&key='. $token;
+        $mail->isHTML(true);
+        $mail->Subject = "Account verification Poliklinik UM";
+
+        try {
+            /*
+            | this function for render email
+            | cz if use file_get_contents, system can't parsing data
+            | to mail.php
+            */
+            function render_mail($name, $mail, $links)
+            {
+                ob_start();
+                include "../page/mail.php";
+                return ob_get_contents();
+            }
+
+            $mail->Body = render_mail($name, $email, $link);
+
+            // Check is mail sent
+            if($mail->Send())
+            {
+                // Remove all session
+                session_unset();
+                session_destroy();
+                echo "Email was sent";
+                // Redirect back with session message
+                // header("location: $basepath/page/verify-account.php?s=success");
+                exit();
+            }
+            else
+            {
+                throw new Exception("Error sent email");
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
     else
     {
