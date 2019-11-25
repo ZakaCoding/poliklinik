@@ -1,4 +1,8 @@
-<?php include_once("../../config/config.php"); ?>
+<?php 
+    include_once("../../config/config.php");
+    
+    $password=$mysqli->$query"SELECT password FROM users WHERE nim = ?";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,7 +63,7 @@
                 <hr>
                 <!-- spacer -->
                 <div class="p-2"></div>
-                <form action="" method="post">
+                <form action="<?= BASE_URL ?>function/f_update.php" method="post">
                     <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
@@ -71,12 +75,12 @@
                     <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="name" id="inputEmail">
+                            <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail">
                             <small id="emailHelp" class="form-text text-muted">    
                             * Change with your active email and dont forget to verification.
                             </small>
                         </div>
-                    </div>
+                    </div>                    
                     <!-- spacer -->
                     <div class="p-2"></div>
                     <div class="clearfix">
@@ -126,11 +130,11 @@
                 <hr>
                 <!-- spacer -->
                 <div class="p-2"></div>
-                <form action="" method="post">
+                <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
                     <div class="form-group row">
                         <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent">
+                            <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password?>" readonly disabled>
                         </div>
                     </div>
                     <!-- spacer -->
@@ -138,7 +142,7 @@
                     <div class="form-group row">
                         <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="newPassword" id="inputNew">
+                            <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
                             <small id="passwordHelp" class="form-text text-muted">    
                                 * Make sure it's at least 8 characters including a number and a lowercase letter.
                             </small>
@@ -149,7 +153,7 @@
                     <div class="form-group row">
                         <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm">
+                            <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm" name="password2">
                         </div>
                     </div>
                     <!-- spacer -->

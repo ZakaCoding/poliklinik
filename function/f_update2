@@ -1,0 +1,28 @@
+<?php
+    // Start session
+    session_start();
+    // get connection to database
+    include_once "../config/config.php";
+
+    $password  = $mysqli->real_escape_string($_POST['password']);
+    $password2 = $mysqli->real_escape_string($_POST['password2']);
+    $nim = $mysqli->$query = "SELECT nim FROM users WHERE name = ?";
+
+    if($password != $password2)
+    {
+        echo "Your password aren't same";
+    }
+    else
+    {
+        $query = "UPDATE `users` SET `password` = $password WHERE `nim` = $nim ";
+    }
+
+    if($mysqli->query($query))
+    {
+        echo "Success";
+    }
+    else
+    {
+        echo "Failed " . $mysqli->error;
+    }
+?>
