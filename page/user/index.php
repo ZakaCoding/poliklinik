@@ -1,7 +1,5 @@
 <?php 
     include_once("../../config/config.php");
-    
-    $password=$mysqli->$query"SELECT password FROM users WHERE nim = ?";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,114 +55,132 @@
 
     <!-- Main -->
     <div class="container roboto-light text-otherblue">
-        <div class="row p-4">
-            <div class="col bg-white border-rounded-md  p-3">
-                <h4 class="form-title">Update Your Name or Email</h4>
-                <hr>
-                <!-- spacer -->
-                <div class="p-2"></div>
-                <form action="<?= BASE_URL ?>function/f_update.php" method="post">
-                    <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control border-softblue" name="name" id="inputName">
-                        </div>
+        <div class="p-4"></div>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Edit profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-reservation-tab" data-toggle="pill" href="#pills-reservation" role="tab" aria-controls="pills-reservation" aria-selected="false">Edit reservation</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <!-- Copy this -->
+                <h2 class="roboto-regular p-2">Edit Profile</h2>
+                <div class="row p-4">
+                    <div class="col bg-white border-rounded-md  p-3">
+                        <h4 class="form-title">Update Your Name or Email</h4>
+                        <hr>
+                        <!-- spacer -->
+                        <div class="p-2"></div>
+                        <form action="<?= BASE_URL ?>function/f_update.php" method="post">
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-softblue" name="name" id="inputName">
+                                </div>
+                            </div>
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail">
+                                    <small id="emailHelp" class="form-text text-muted">    
+                                    * Change with your active email and dont forget to verification.
+                                    </small>
+                                </div>
+                            </div>                    
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                            </div>
+                        </form>
                     </div>
-                    <!-- spacer -->
                     <div class="p-2"></div>
-                    <div class="form-group row">
-                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail">
-                            <small id="emailHelp" class="form-text text-muted">    
-                            * Change with your active email and dont forget to verification.
-                            </small>
+                    <div class="col bg-white border-rounded-md  p-3">
+                        <h4 class="form-title">Manage Your Social Login</h4>
+                        <hr>
+                        <!-- spacer -->
+                        <div class="p-2"></div>
+                        <p>Enable or disable login to User page from your social login.</p>
+                        <div class="p-2"></div>
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <div class="media">
+                                    <img src="<?= BASE_URL ?>asset/img/google.png" class="mr-3 logo-small" alt="...">
+                                    <div class="media-body p-1 align-middle">
+                                        Connect Google Account
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <a href="" class="btn btn-outline-primary">Connect</a>
+                            </div>
                         </div>
-                    </div>                    
-                    <!-- spacer -->
-                    <div class="p-2"></div>
-                    <div class="clearfix">
-                        <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
-                    </div>
-                </form>
-            </div>
-            <div class="p-2"></div>
-            <div class="col bg-white border-rounded-md  p-3">
-                <h4 class="form-title">Manage Your Social Login</h4>
-                <hr>
-                <!-- spacer -->
-                <div class="p-2"></div>
-                <p>Enable or disable login to User page from your social login.</p>
-                <div class="p-2"></div>
-                <div class="clearfix">
-                    <div class="float-left">
-                        <div class="media">
-                            <img src="<?= BASE_URL ?>asset/img/google.png" class="mr-3 logo-small" alt="...">
-                            <div class="media-body p-1 align-middle">
-                                Connect Google Account
+                        <div class="p-2"></div>
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <div class="media">
+                                    <img src="<?= BASE_URL ?>asset/img/facebook.png" class="mr-3 logo-small" alt="...">
+                                    <div class="media-body p-1 align-middle">
+                                        Connect Facebook Account
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <a href="" class="btn btn-outline-primary">Connect</a>
                             </div>
                         </div>
                     </div>
-                    <div class="float-right">
-                        <a href="" class="btn btn-outline-primary">Connect</a>
-                    </div>
-                </div>
-                <div class="p-2"></div>
-                <div class="clearfix">
-                    <div class="float-left">
-                        <div class="media">
-                            <img src="<?= BASE_URL ?>asset/img/facebook.png" class="mr-3 logo-small" alt="...">
-                            <div class="media-body p-1 align-middle">
-                                Connect Facebook Account
+                    <div class="w-100 p-2"></div>
+                    <div class="col bg-white border-rounded-md  p-3">
+                        <h4 class="form-title">Update Your Password</h4>
+                        <hr>
+                        <!-- spacer -->
+                        <div class="p-2"></div>
+                        <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
+                            <div class="form-group row">
+                                <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password?>">
+                                </div>
                             </div>
-                        </div>
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="form-group row">
+                                <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <small id="passwordHelp" class="form-text text-muted">    
+                                        * Make sure it's at least 8 characters including a number and a lowercase letter.
+                                    </small>
+                                </div>
+                            </div>
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="form-group row">
+                                <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm" name="password2">
+                                </div>
+                            </div>
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="float-right">
-                        <a href="" class="btn btn-outline-primary">Connect</a>
-                    </div>
+                    <div class="p-2"></div>
+                    <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
             </div>
-            <div class="w-100 p-2"></div>
-            <div class="col bg-white border-rounded-md  p-3">
-                <h4 class="form-title">Update Your Password</h4>
-                <hr>
-                <!-- spacer -->
-                <div class="p-2"></div>
-                <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
-                    <div class="form-group row">
-                        <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password?>" readonly disabled>
-                        </div>
-                    </div>
-                    <!-- spacer -->
-                    <div class="p-2"></div>
-                    <div class="form-group row">
-                        <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
-                            <small id="passwordHelp" class="form-text text-muted">    
-                                * Make sure it's at least 8 characters including a number and a lowercase letter.
-                            </small>
-                        </div>
-                    </div>
-                    <!-- spacer -->
-                    <div class="p-2"></div>
-                    <div class="form-group row">
-                        <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm" name="password2">
-                        </div>
-                    </div>
-                    <!-- spacer -->
-                    <div class="p-2"></div>
-                    <div class="clearfix">
-                        <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
-                    </div>
-                </form>
+            <div class="tab-pane fade" id="pills-reservation" role="tabpanel" aria-labelledby="pills-reservation-tab">
+                <h2 class="roboto-regular p-2">Edit Reservation</h2>
             </div>
-            <div class="p-2"></div>
-            <div class="col bg-white border-rounded-md  p-3">Column</div>
         </div>
     </div>
 
