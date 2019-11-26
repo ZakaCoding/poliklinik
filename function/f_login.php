@@ -1,3 +1,123 @@
 <?php
+    // Start session
+    session_start();
     // get connection to database
     include_once "../config/config.php";
+
+    // if register button did not click
+    if(!isset($_POST['sign']))
+    {
+        // redirect back
+        header("location: " . BASE_URL . 'page/auth/login.php');
+        exit(); // Stop code
+    }
+
+    // Get all data request form register.php
+    $email = $mysqli->real_escape_string($_POST['email']);
+    $password = $mysqli->real_escape_string($_POST['password']);
+
+    /**
+     * Error handling with session flash data
+     */
+    function errorHandling($errCode, $message)
+    {
+        global $name, $nim, $email;
+        $error = [
+            "errorCode" => $errCode
+        ];
+        
+        // create temp data if any error
+        $request = [
+            "email" => $email
+        ];
+        
+        // create session error
+        $_SESSION['data'] = $request;
+        $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
+        
+        return header('location:' . BASE_URL . 'page/auth/login.php');
+    }
+
+
+    /**
+     * Error exceptipon handling
+     * if any error, system throw error and
+     * redirect back with flash message
+     */
+    $message = '';
+
+    try {
+        // Check form email
+        if(empty($email))
+        {
+            $message = "The name field is required.";
+            throw new Exception("ERR_EMPTY_EMAIL");
+        }
+        else
+        {
+            /**
+             * validate email format
+             */
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                $message = "Invalid email format";
+                throw new Exception("ERR_INVALID_EMAIL");
+            }
+        }
+
+        /**
+         * check email is exist
+         * email unique any user just can use 1 email for 1 account
+         */
+        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1");
+        if($result->num_rows == 0)
+        {
+            $message = "The account does not exist. Enter a different account or get a new account.";
+            throw new Exception("ERR_EMAIL_NOT_EXISTS");
+        }
+        else
+        {
+            // save to varible
+            $data = $result->fetch_assoc();
+        }
+
+        // Check form password and confirm
+        if(empty($password))
+        {
+            $message = "This field is required.";
+            throw new Exception("ERR_PWD_EMPTY");
+        }
+    } catch (Exception $e) { 
+        errorHandling($e->getMessage(),$message);
+    }
+
+    /**
+     * this new line for :
+     * 
+     * --> create token for secure login system
+     * 
+     * --> create password hash
+     * 
+     * --> Store data to database
+     * 
+     * --> sent email to user for confirm their account
+     */
+
+    //  Check password
+    if(password_verify($password,$data['password']))
+    {
+        // Redirect to main page with user data
+        $_SESSION['user'] = [
+            'name' => $data['name'],
+            'nim' => $data['nim'],
+            'email' => $data['email'],
+            'token' => $data['remember_token'],
+            'login' => true
+        ];
+        header('location: '.BASE_URL);
+    }
+    else
+    {
+        $message = "Your account or password is incorrect. If you don't remember your password, reset it now.";
+        errorHandling("ERR_INVALID_PASSWORD",$message);
+    }

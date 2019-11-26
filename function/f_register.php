@@ -199,7 +199,7 @@
         $mail->addAddress($email,$usrname);
 
         // Content sent
-        $link = BASE_URL."page/verify-account.php?email=$email&token=&$token";
+        $link = BASE_URL."page/verify-account.php?email=$email&token=$token";
         // Link for AccountVerify
         $mail->isHTML(true);
         $mail->Subject = "Email confirmation for activated your account";

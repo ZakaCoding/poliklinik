@@ -109,6 +109,9 @@
 .bg-white {
   background-color: #ffffff;
 }
+.bg-smoke {
+  background-color: #F5F5F5;
+}
 .border-softblue {
   border: 1px solid #d2e8f8;
 }
@@ -123,4 +126,58 @@
   font-size: 16pt;
   font-family: 'Roboto Light';
 }
+.email-icon {
+  max-width: 300px;
+}
+.error {
+  display: block;
+  margin:auto;
+  overflow: hidden;
+  position: relative;
+  height: 247px;
+  width: 400px;
+}
+.error-bg {
+  max-width: 400px;
+  position: absolute;
+  left: 0;
+}
+.error-character {
+  max-width: 300px;
+  position: absolute;
+  left: 45px;
+  bottom: 0;
+  animation: fly .5s ease infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes fly {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 20px;
+  }
+}
+
+/* Sign and login style */
+.register-form {
+    width: 340px;
+    margin: 50px auto;
+}
+.register-form form {
+    margin-bottom: 15px;
+    background: #ffffff;
+    border: 1px solid #f7f7f7;
+    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
+    padding: 30px;
+}
+.register-form h2 {
+    margin: 0 0 15px;
+}
+.form-control, .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+
 

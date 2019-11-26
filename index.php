@@ -69,8 +69,21 @@
             </ul>
             <form class="form-inline mt-2 mt-md-0">
               <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-              <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
-              <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
+              <!-- Check user has login -->
+              <?php
+                if(isset($_SESSION['user']))
+                {
+                  if($_SESSION['user']['login'] == true):
+              ?>
+                <a class="text-white">Hello, <?= $_SESSION['user']['name'] ?></a> &nbsp;
+                <a class="text-white" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+              <?php else: ?>
+                <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
+                <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
+              <?php
+                  endif;
+                }
+              ?>
             </form>
           </div>
       </div>
