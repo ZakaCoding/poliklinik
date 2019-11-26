@@ -70,10 +70,10 @@
          * check email is exist
          * email unique any user just can use 1 email for 1 account
          */
-        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email' LIMIT 1");
+        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email' AND `email_verified_at` IS NOT NULL LIMIT 1");
         if($result->num_rows == 0)
         {
-            $message = "The account does not exist. Enter a different account or get a new account.";
+            $message = "The account does not exist or not activated. Enter a different account or get a new account.";
             throw new Exception("ERR_EMAIL_NOT_EXISTS");
             exit();
         }
@@ -111,15 +111,3 @@
     } catch (Exception $e) { 
         errorHandling($e->getMessage(),$message);
     }
-
-    /**
-     * this new line for :
-     * 
-     * --> create token for secure login system
-     * 
-     * --> create password hash
-     * 
-     * --> Store data to database
-     * 
-     * --> sent email to user for confirm their account
-     */
