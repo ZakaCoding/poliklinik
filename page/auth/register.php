@@ -1,6 +1,33 @@
 <?php 
     include_once('../../config/config.php'); 
     session_start();
+
+    // Check if user has login and force redirect to landing page
+    // user cant see this login page or register
+    // check user has login or nah
+    if(isset($_SESSION['user']))
+    {   
+        // Redirect to login page
+        // die("This 1");
+        header("location: ".BASE_URL);
+        exit(1);
+
+        /**
+         * i think this gate is weak >>> if(isset($_SESSION['user])) <<<
+         * but if this gate can access by user(superuser/hacker)
+         * we will fix this bug
+         * and for hacker or whoever you are. if now this hole, you can sent bug data to developer
+         * on github https://github.com/ZakaCoding/poliklinik.git
+         * Head of Developer --> ZakaCoding
+         * And the other member was built this project :
+         * --> Rizki Nisa
+         * --> Setya Rahadi
+         * --> Oktarian
+         * 
+         * Code last Built 26/11/2019 21:33
+         */
+    }
+
     // get error data if any
     $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
     $invalid_name = '';

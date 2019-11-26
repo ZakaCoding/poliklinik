@@ -34,7 +34,23 @@
         exit(1);
     }
 
+<<<<<<< HEAD
 
+=======
+    // Data disini bray >>
+    // get data from database
+    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    if($user->num_rows > 0)
+    {
+        // Fetch to array data
+        $user = $user->fetch_assoc();
+
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+    }
+>>>>>>> 3ef0637faf9a96c381542e3c2a3506e789c83c27
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +91,26 @@
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <?php
+                if(isset($_SESSION['user'])) :
+                  if($_SESSION['user']['login'] == true):
+                ?>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hello, <?= $_SESSION['user']['name'] ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Manage Reservation</a>
+                    <a class="dropdown-item" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                    </div>
+                </div>
+
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
+                    <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
+                <?php endif; ?>
                 </form>
             </div>
         </div>
@@ -105,7 +141,7 @@
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-softblue" name="name" id="inputName">
+                                    <input type="text" class="form-control border-softblue" name="name" id="inputName" value="<?= $user['name'] ?>">
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -113,7 +149,7 @@
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail">
+                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
                                     <small id="emailHelp" class="form-text text-muted">    
                                     * Change with your active email and dont forget to verification.
                                     </small>
@@ -172,7 +208,11 @@
                             <div class="form-group row">
                                 <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
+<<<<<<< HEAD
                                     <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password;?>" readonly disabled>
+=======
+                                    <input type="text" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="">
+>>>>>>> 3ef0637faf9a96c381542e3c2a3506e789c83c27
                                 </div>
                             </div>
                             <!-- spacer -->
