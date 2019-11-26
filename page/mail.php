@@ -189,7 +189,7 @@
                   <td class="content-cell">
                     <h1>Verify your email address</h1>
                     <p>
-                      Almost done, <b>@<?= $username; ?></b>! To complete your sign up, we just need to verify your email address:<br> <a href="mailto: <?= $mail; ?>"><?= $mail; ?></a><br>
+                      Almost done, <b>@<?= $name; ?></b>! To complete your sign up, we just need to verify your email address:<br> <a href="mailto: <?= $mail; ?>"><?= $mail; ?></a><br>
                       Thanks for signing up We're excited to have you as an early user.
                     </p>
                     <!-- Action -->
