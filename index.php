@@ -71,19 +71,16 @@
               <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
               <!-- Check user has login -->
               <?php
-                if(isset($_SESSION['user']))
-                {
+                if(isset($_SESSION['user'])) :
                   if($_SESSION['user']['login'] == true):
               ?>
-                <a class="text-white">Hello, <?= $_SESSION['user']['name'] ?></a> &nbsp;
-                <a class="text-white" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                  <a class="text-white">Hello, <?= $_SESSION['user']['name'] ?></a> &nbsp;
+                  <a class="text-white" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                <?php endif; ?>
               <?php else: ?>
                 <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
                 <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
-              <?php
-                  endif;
-                }
-              ?>
+              <?php endif; ?>
             </form>
           </div>
       </div>
