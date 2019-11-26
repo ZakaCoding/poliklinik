@@ -89,7 +89,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-lg btn-block" name="sign" id="button">Sign</button>
-                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/login.php' ?>">Log in</a></small>
+                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/register.php' ?>">Sign up</a></small>
                             </div>
                         </form>
                     </div>
