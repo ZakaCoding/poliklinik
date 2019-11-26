@@ -5,6 +5,7 @@
     $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
     $invalid_email = '';
     $invalid_password = '';
+    $loginFailed = '';
 
     if($error != NULL)
     {
@@ -26,6 +27,10 @@
             case 'ERR_INVALID_PASSWORD':
                 # code...
                 $invalid_password = 'is-invalid';
+                break;
+            case 'ERR_LOGIN_FAILED':
+                # code...
+                $loginFailed = 'is-invalid';
                 break;
             default:
                 # code...
@@ -89,6 +94,17 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-lg btn-block" name="sign" id="button">Sign</button>
+                                <?php
+                                    if($loginFailed == 'is-invalid'):
+                                ?>
+                                    <div class="p-2"></div>
+                                    <div class="alert alert-warning alert-dismissible fade show animated shake" role="alert">
+                                        <strong>Hmmm :(</strong><?= $message; ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
                                 <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/register.php' ?>">Sign up</a></small>
                             </div>
                         </form>

@@ -93,15 +93,30 @@
         //  Check password
         if(password_verify($password,$data['password']))
         {
-            // Redirect to main page with user data
-            $_SESSION['user'] = [
-                'name' => $data['name'],
-                'nim' => $data['nim'],
-                'email' => $data['email'],
-                'token' => $data['remember_token'],
-                'login' => true
-            ];
-            header('location: '.BASE_URL);
+            // store token for secure login
+            // Create Token
+            $token  = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+            $token  = str_shuffle($token);
+            $token  = substr($token,0,32);
+
+            $mysqli->query("UPDATE users SET remember_token = '$token' WHERE email = '$email'");
+            if($mysqli->affected_rows)
+            {
+                // Redirect to main page with user data
+                $_SESSION['user'] = [
+                    'name' => $data['name'],
+                    'nim' => $data['nim'],
+                    'email' => $data['email'],
+                    'token' => $token,
+                    'login' => true
+                ];
+                header('location: '.BASE_URL);
+            }
+            else
+            {
+                $message = "Login failed. Something went wrong. ERROR[77222] Call admin for this error.";
+                throw new Exception("ERR_LOGIN_FAILED");
+            }
         }
         else
         {

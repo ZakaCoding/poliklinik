@@ -1,5 +1,38 @@
 <?php 
     include_once("../../config/config.php");
+    session_start();
+
+    // check user has login or nah
+    if(isset($_SESSION['user']))
+    {   
+        // First check status is login on session data
+        if($_SESSION['user']['login']) //if true
+        {
+            // Then check all data session is match
+            $query = $mysqli->query("SELECT * FROM `users` WHERE email = '". $_SESSION['user']['email'] ."' AND remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
+            if($query->num_rows == 0)
+            {
+                // Redirect to login page
+                // die("This 1");
+                header("location: ".BASE_URL.'page/auth/login.php');
+                exit(1);
+            }
+        }
+        else
+        {
+            // Redirect to login page
+            // die("this 2");
+            header("location: ".BASE_URL.'page/auth/login.php');
+            exit(1);
+        }
+    }
+    else
+    {
+        // Redirect to login page
+        // die("This 3");
+        header("location: ".BASE_URL.'page/auth/login.php');
+        exit(1);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
