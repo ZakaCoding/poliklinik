@@ -1,5 +1,5 @@
 
-<?php include_once('config/config.php'); ?>
+<?php include_once('config/config.php'); session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,34 +43,37 @@
 
   <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Poliklinik</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Poliklinik</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Help</a>
-            </li>
-            <!-- <li class="nav-item">
-              <a class="nav-link disabled" href="#">Disabled</a>
-            </li> -->
-          </ul>
-          <form class="form-inline mt-2 mt-md-0">
-            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-            <button class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" type="submit">Login</button>
-          </form>
-        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+              </li> -->
+            </ul>
+            <form class="form-inline mt-2 mt-md-0">
+              <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
+              <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
+              <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
+            </form>
+          </div>
+      </div>
     </nav>
   </header>
 
