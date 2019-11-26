@@ -3,6 +3,8 @@
     // These must be at the top of your script, not inside a function
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
+    // Load composer's AutoLoader
+    require '../source/vendor/autoload.php';
 
     // Start session
     session_start();
@@ -13,7 +15,7 @@
     if(!isset($_POST['signup']))
     {
         // redirect back
-        header("location: " . BASE_URL . '/page/auth/register.php');
+        header("location: " . BASE_URL . 'page/auth/register.php');
         exit(); // Stop code
     }
 
@@ -27,26 +29,24 @@
     /**
      * Error handling with session flash data
      */
-    function errorHandling($errCode = [''], $message)
+    function errorHandling($errCode, $message)
     {
         global $name, $nim, $email;
-
         $error = [
-            "errorCode" => $errCode,
-            "message" => $message
+            "errorCode" => $errCode
         ];
-
+        
         // create temp data if any error
         $request = [
             "name" => $name,
             "nim" => $nim,
             "email" => $email
         ];
-
+        
         // create session error
         $_SESSION['data'] = $request;
         $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
-
+        
         return header('location:' . BASE_URL . '/page/auth/register.php');
     }
 
@@ -70,7 +70,7 @@
             /**
              * Only letter and spacing are allowed
              */
-            if(!preg_match("/^[a-zA-Z_-\s]*$/",$name))
+            if(!preg_match("/^[a-zA-Z_\s]*$/",$name))
             {
                 $message = "This field can only be filled with the alphabet excluding numbers or characters.";
                 throw new Exception("ERR_INVALID_NAME");
@@ -114,7 +114,7 @@
                  * check email is not exist
                  * email unique any user just can use 1 email for 1 account
                  */
-                $result = $mysqli->query("SELECT `email` FROM `users` WHERE `email` = $email LIMIT 1");
+                $result = $mysqli->query("SELECT `email` FROM `users` WHERE `email` = '$email' LIMIT 1");
                 if($result->num_rows == 1)
                 {
                     $message = "Email already exists. if you have account before you can login";
@@ -144,8 +144,8 @@
                 throw new Exception("ERR_PASSWORD_MISMATCH");
             }
         }
-
     } catch (Exception $e) {
+        
         errorHandling($e->getMessage(),$message);
     }
 
@@ -175,73 +175,67 @@
 
     if($mysqli->query($query))
     {
-        /**
-         * if data has been sent to database
-         * next system will sent confirmation code for 
-         * activated users account
-         * if user not click email confirmation
-         * then that account cant be use
-         */
+        /*  This code for send email verification
+        *   Email verification use PHPMailer, it's open source code form Developer
+        *   With GPL License.
+        */
 
-        // Load composer Autoloader
-        require '../vendor/autoload.php';
-        // make object for PHPMailer
+        // Make object from PHPMailer
         $mail = new PHPMailer(true);
 
-        // Setting config file for send email
+        // Server Setting for send mail
         $mail->isSMTP(true);
-        $mail->SMTPDebug = false;
+        $mail->SMTPDebug = 1;
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        // This secret data
-        // dont share username or password to everyone
-        // Only share for Developer this website
         $mail->Username = 'toor.env@gmail.com';
         $mail->Password = 'kze-j8sgg-7cd81f88';
+        // Password is secret. dont tell anybody ONLY DEVELOPER to use
         $mail->SMTPSecure = 'ssl';
-        $mail->port = 465;
+        $mail->Port = 465;
 
         // Receipments
-        $mail->setFrom('toor.env@gmail.com', 'Developer');
-        $mail->addAddress($email,$name);
+        $mail->setFrom('donot-reply@poliklinik.um.ac.id', 'Developer');
+        $mail->addAddress($email,$usrname);
 
         // Content sent
-        $link = BASE_URL . 'page/verify-account.php?email='.$email.'&key='. $token;
+        $link = BASE_URL."page/verify-account.php?email=$email&token=&$token";
+        // Link for AccountVerify
         $mail->isHTML(true);
-        $mail->Subject = "Account verification Poliklinik UM";
+        $mail->Subject = "Email confirmation for activated your account";
 
-        try {
-            /*
-            | this function for render email
-            | cz if use file_get_contents, system can't parsing data
-            | to mail.php
-            */
-            function render_mail($name, $mail, $links)
-            {
-                ob_start();
-                include "../page/mail.php";
-                return ob_get_contents();
-            }
+        /*
+        | this function for render email
+        | cz if use file_get_contents, system can't parsing data
+        | to mail.php
+        */
+        function render_mail($name, $mail, $links)
+        {
+            ob_start();
+            include "../page/mail.php";
+            return ob_get_contents();
+        }
 
-            $mail->Body = render_mail($name, $email, $link);
+        $mail->Body = render_mail($name, $email, $link);
 
-            // Check is mail sent
-            if($mail->Send())
-            {
-                // Remove all session
-                session_unset();
-                session_destroy();
-                echo "Email was sent";
-                // Redirect back with session message
-                // header("location: $basepath/page/verify-account.php?s=success");
-                exit();
-            }
-            else
-            {
-                throw new Exception("Error sent email");
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        // Check is mail sent
+        if($mail->Send())
+        {
+            $_SESSION['success'] = [
+                'status' => 'success',
+                'message' => 'You have successfully created your account. Please check your email for confirmation.'
+            ];
+            header("location:". BASE_URL .'/page/auth/register.php');
+        }
+        else
+        {
+            // Error code
+            // [77001] Account has create but error when sent email
+            $_SESSION['failed'] = [
+                'status' => 'failed',
+                'message' => 'Something went wrong. your account has ben create, but have error. Call admin and show this error code [77001]'
+            ];
+            header("location:". BASE_URL .'/page/auth/register.php');
         }
     }
     else
