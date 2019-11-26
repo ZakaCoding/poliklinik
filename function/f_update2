@@ -8,18 +8,46 @@
     $password2 = $mysqli->real_escape_string($_POST['password2']);
     $nim = $mysqli->$query = "SELECT nim FROM users WHERE name = ?";
 
-    if($password != $password2)
+    function errorHandling($errCode, $message)
     {
-        echo "Your password aren't same";
+        global $name, $nim, $email;
+        $error = [
+            "errorCode" => $errCode
+        ];
+        
+        // create temp data if any error
+        $request = [
+            "name" => $name,
+            "nim" => $nim,
+            "email" => $email
+        ];
+        
+        // create session error
+        $_SESSION['data'] = $request;
+        $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
+        
+        return header('location:' . BASE_URL . '/page/auth/register.php');
     }
-    else
-    {
-        $query = "UPDATE `users` SET `password` = $password WHERE `nim` = $nim ";
+
+    $message = '';
+
+    try {
+        // Check form password and confirm
+        if($password != $confirmPassword)
+        {
+            $message = "Your typing password is not match";
+            throw new Exception("ERR_PASSWORD_MISMATCH");
+        }
+    } catch (Exception $e) {
+        
+        errorHandling($e->getMessage(),$message);
     }
+
+    $query = "UPDATE `users` SET `password` = $password WHERE `nim` = $nim ";
 
     if($mysqli->query($query))
     {
-        echo "Success";
+        echo "Update Success";
     }
     else
     {

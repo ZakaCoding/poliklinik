@@ -33,6 +33,8 @@
         header("location: ".BASE_URL.'page/auth/login.php');
         exit(1);
     }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,9 +50,9 @@
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Poliklinik</a>
+            <a class="navbar-brand" href="<?=BASE_URL?>index.php">Poliklinik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -170,7 +172,7 @@
                             <div class="form-group row">
                                 <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password?>">
+                                    <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password;?>" readonly disabled>
                                 </div>
                             </div>
                             <!-- spacer -->
