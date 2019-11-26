@@ -30,6 +30,10 @@
                 # code...
                 $invalid_email = 'is-invalid';
                 break;
+            case 'ERR_EMAIL_EXISTS':
+                # code...
+                $invalid_email = 'is-invalid';
+                break;
             case 'ERR_EMPTY_PASSWORD':
                 # code...
                 $invalid_password = 'is-invalid';
@@ -56,6 +60,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
+    <!-- Vendor css -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/animate.css/animate.min.css">
+
     <!-- Main css -->
     <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
 </head>
@@ -121,8 +128,38 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-lg btn-block" name="signup" id="button">Sign up</button>
-                                <small class="form-text text-muted">By clicking “Sign up for ShareIDEA”, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails.</small><br>
-                                <small class="form-text text-muted text-center">Already have an account ? <a href="?url=signin">Log in</a></small>
+                                <small class="form-text text-muted">By clicking “Sign up, you agree to our terms of service and privacy statement. We’ll occasionally send you account related emails.</small><br>
+
+                                <!-- Check if was success create account -->
+                                <?php
+                                    // 
+                                    // check session was set
+                                    if(isset($_SESSION['success'])) :
+                                        
+                                ?>
+                                <!-- Show allert message success -->
+                                <div class="alert alert-success alert-dismissible fade show animated shake" role="alert">
+                                    <strong>Well done!&nbsp;</strong><?= $_SESSION['success']['message'] ?>
+                                    <hr>
+                                    <p class="mb-0">goto <a href="<?= BASE_URL.'page/auth/login.php' ?>">login</a> page</p>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php elseif(isset($_SESSION['failed'])) : ?>
+                                <!-- Show allert message failed -->
+                                <div class="alert alert-warning alert-dismissible fade show animated shake" role="alert">
+                                    <strong>Oopss&nbsp;</strong><?= $_SESSION['failed']['message'] ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <?php 
+                                    endif;
+                                ?>
+
+
+                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/login.php' ?>">Log in</a></small>
                             </div>
                         </form>
                     </div>
