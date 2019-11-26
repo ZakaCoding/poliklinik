@@ -33,10 +33,7 @@
         header("location: ".BASE_URL.'page/auth/login.php');
         exit(1);
     }
-
-<<<<<<< HEAD
-
-=======
+    
     // Data disini bray >>
     // get data from database
     $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
@@ -50,7 +47,6 @@
         // you want data email then code is
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
->>>>>>> 3ef0637faf9a96c381542e3c2a3506e789c83c27
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,22 +201,11 @@
                         <!-- spacer -->
                         <div class="p-2"></div>
                         <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
-                            <div class="form-group row">
-                                <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
-                                <div class="col-sm-10">
-<<<<<<< HEAD
-                                    <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password;?>" readonly disabled>
-=======
-                                    <input type="text" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="">
->>>>>>> 3ef0637faf9a96c381542e3c2a3506e789c83c27
-                                </div>
-                            </div>
                             <!-- spacer -->
-                            <div class="p-2"></div>
                             <div class="form-group row">
                                 <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <input type="text" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
                                     <small id="passwordHelp" class="form-text text-muted">    
                                         * Make sure it's at least 8 characters including a number and a lowercase letter.
                                     </small>
