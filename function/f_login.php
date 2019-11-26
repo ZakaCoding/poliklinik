@@ -36,6 +36,7 @@
         $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
         
         return header('location:' . BASE_URL . 'page/auth/login.php');
+        exit();
     }
 
 
@@ -74,6 +75,7 @@
         {
             $message = "The account does not exist. Enter a different account or get a new account.";
             throw new Exception("ERR_EMAIL_NOT_EXISTS");
+            exit();
         }
         else
         {
@@ -86,6 +88,25 @@
         {
             $message = "This field is required.";
             throw new Exception("ERR_PWD_EMPTY");
+        }
+
+        //  Check password
+        if(password_verify($password,$data['password']))
+        {
+            // Redirect to main page with user data
+            $_SESSION['user'] = [
+                'name' => $data['name'],
+                'nim' => $data['nim'],
+                'email' => $data['email'],
+                'token' => $data['remember_token'],
+                'login' => true
+            ];
+            header('location: '.BASE_URL);
+        }
+        else
+        {
+            $message = "Your account or password is incorrect. If you don't remember your password, reset it now.";
+            throw new Exception ("ERR_INVALID_PASSWORD");
         }
     } catch (Exception $e) { 
         errorHandling($e->getMessage(),$message);
@@ -102,22 +123,3 @@
      * 
      * --> sent email to user for confirm their account
      */
-
-    //  Check password
-    if(password_verify($password,$data['password']))
-    {
-        // Redirect to main page with user data
-        $_SESSION['user'] = [
-            'name' => $data['name'],
-            'nim' => $data['nim'],
-            'email' => $data['email'],
-            'token' => $data['remember_token'],
-            'login' => true
-        ];
-        header('location: '.BASE_URL);
-    }
-    else
-    {
-        $message = "Your account or password is incorrect. If you don't remember your password, reset it now.";
-        errorHandling("ERR_INVALID_PASSWORD",$message);
-    }
