@@ -201,7 +201,14 @@
                         <!-- spacer -->
                         <div class="p-2"></div>
                         <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
+                            <div class="form-group row">
+                                <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control border-softblue" name="currpass" id="inputCurr">
+                                </div>
+                            </div>
                             <!-- spacer -->
+                            <div class="p-2"></div>
                             <div class="form-group row">
                                 <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
