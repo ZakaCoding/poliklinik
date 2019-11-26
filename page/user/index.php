@@ -62,9 +62,9 @@
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="<?=BASE_URL?>index.php">Poliklinik</a>
+            <a class="navbar-brand" href="<?=BASE_URL ?>">Poliklinik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -204,7 +204,7 @@
                             <div class="form-group row">
                                 <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-softblue" name="currpass" id="inputCurr">
+                                    <input type="password" class="form-control border-softblue" name="currpass" id="inputCurr">
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -212,7 +212,7 @@
                             <div class="form-group row">
                                 <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
                                     <small id="passwordHelp" class="form-text text-muted">    
                                         * Make sure it's at least 8 characters including a number and a lowercase letter.
                                     </small>

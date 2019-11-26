@@ -79,7 +79,7 @@
                   Hello, <?= $_SESSION['user']['name'] ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="<?= BASE_URL?>page/user">Profile</a>
+                  <a class="dropdown-item" href="<?= BASE_URL ?>page/user">Profile</a>
                   <a class="dropdown-item" href="#">Manage Reservation</a>
                   <a class="dropdown-item" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
                 </div>
