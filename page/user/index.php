@@ -59,6 +59,8 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
     <!-- Sweet alert -->
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <!-- Sweet alert 2 -->
+   <script src="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
@@ -263,7 +265,7 @@
     </div>
 
     <script>
-        swal("Are you sure, dude?", {
+        Swal("Are you sure, dude?", {
         buttons: {
             cancel: "No",
             catch: {
@@ -277,17 +279,15 @@
         
             case "catch":
             location.href = "f_update.php";
-            swal("Success!", "Your changes has been saved!", "success");
+            Swal("Success!", "Your changes has been saved!", "success");
             break;
         
             default:
-            swal("Changes has been abort!");
+            Swal("Changes has been abort!");
         }
         });
     </script>
 
-   <!-- Sweet alert 2 -->
-   <script src="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
    <!-- Javascript Vendor-->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
