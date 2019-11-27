@@ -14,6 +14,10 @@
   src: url('../asset/font/Roboto-Regular.ttf');
 }
 @font-face {
+  font-family: 'Roboto Bold';
+  src: url('../asset/font/Roboto-Bold.ttf');
+}
+@font-face {
   font-family: 'Roboto Light';
   src: url('../asset/font/Roboto-Light.ttf');
 }
@@ -24,6 +28,9 @@
 }
 .roboto-regular {
   font-family: 'Roboto Regular';
+}
+.roboto-bold {
+  font-family: 'Roboto Bold';
 }
 .roboto-light {
   font-family: 'Roboto Light';
@@ -97,6 +104,9 @@
 .text-otherblue {
   color: #466C84 !important;
 }
+.text-pink {
+  color: #FB387E !important;
+}
 .border-rounded-md {
   border-radius: 10px;
 }
@@ -117,6 +127,9 @@
 }
 .logo-small {
   width: 32px;
+}
+.d-flex {
+  display: inline-flex;
 }
 
 /**
@@ -188,4 +201,25 @@
   transform: translate(-50%,0);
 }
 
+/* Styling landing page */
+.widget-reservation {
+  position: relative; 
+  bottom: 80px;
+  background-color: white;
+  border-radius: 5px; 
+  box-shadow : 0 10px 20px 0 rgba(53,64,90,.2);
+  font-family: 'Roboto Regular';
+}
+.number {
+  font-size: 16pt;
+  padding: 10px 5px 10px 5px;
+  width: 60px;
+  border-radius: 15px;
+  text-align: center;
+  border: 2px solid #0064d2;
+  float: right;
+}
+.card-title {
+  font-size: 18pt;
+}
 

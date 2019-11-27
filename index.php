@@ -12,6 +12,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
 
     <!-- Font Awesome Icons -->
     <link href="asset/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -134,36 +136,100 @@
   </a>
 </div>
 
-  <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow: 8px 8px 8px #888888">
-    <div class="text-white text-center"><br>
-      <h2 style="color: black">Specialty</h2>
-        <hr>
-      <div class="row" style="background-color: white; color: black">
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-stethoscope mb-4"></i>
-            <h3 class="h4 mb-2">Umum</h3>
-            <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan penyakit dan pemeriksaan kesehatan.</p>
+  <!-- if user has login speciality is hidden -->
+  <?php
+    if(isset($_SESSION['user'])) :
+      if($_SESSION['user']['login']) :
+      endif;
+  ?>
+
+    <!-- This menu widget if user has login, user can reservation -->
+    <div class="container">
+      <div class="card widget-reservation">
+        <!-- Header of widget -->
+        <div class="card-header text-otherblue bg-whatever">
+          <div class="clearfix">
+            <div class="float-left">
+              <h5 class="roboto-light">Hey, Kamu!</h5>
+              <h3 class="roboto-bold">Mau Checkup ?</h3>
+            </div>
+            <div class="float-right align-middle">
+              <h6 class="roboto-light">Sisa antrian hari ini&nbsp;<i class="fas fa-question-circle text-success"></i></h6>
+              <div class="roboto-bold number">
+                100
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-tooth mb-4"></i>
-            <h3 class="h4 mb-2">Gigi</h3>
-            <p class="text-muted mb-0">Hadir untuk menangani keluhan seputar gigi dan akan dan pemeriksaan gigi.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-baby mb-4"></i>
-            <h3 class="h4 mb-2">Ibu dan Anak</h3>
-            <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan dari ibu dan anak dengan sepenuh hati.</p>
-          </div>
+        <!-- Content here -->
+        <div class="card-body p-4">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="text-otherblue card-title"><i class="fas fa-user-md text-pink"></i>&nbsp;Masukan keluhannmu</label>
+              <input type="email" class="form-control border-softblue border-rounded-md" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <small id="emailHelp" class="form-text text-muted text-softblue">* Masukan keluhannmu supaya dokter bisa memahami gejala penyakit kamu.</small>
+            </div>
+            <hr>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputDate">Tanggal check up</label>
+                <input type="date" class="form-control dateselect" required="required" id="inputDate">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputState">State</label>
+                <select id="inputState" class="form-control">
+                  <option selected>Choose...</option>
+                  <option>...</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputZip">Zip</label>
+                <input type="text" class="form-control" id="inputZip">
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <br><br>
-  </div>
+    <!-- END menu widget -->
+
+  <?php
+    else:
+  ?>
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow: 8px 8px 8px #888888">
+      <div class="text-white text-center"><br>
+        <h2 style="color: black">Specialty</h2>
+          <hr>
+        <div class="row" style="background-color: white; color: black">
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="mt-5">
+              <i class="fas fa-4x fa-stethoscope mb-4"></i>
+              <h3 class="h4 mb-2">Umum</h3>
+              <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan penyakit dan pemeriksaan kesehatan.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="mt-5">
+              <i class="fas fa-4x fa-tooth mb-4"></i>
+              <h3 class="h4 mb-2">Gigi</h3>
+              <p class="text-muted mb-0">Hadir untuk menangani keluhan seputar gigi dan akan dan pemeriksaan gigi.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 text-center">
+            <div class="mt-5">
+              <i class="fas fa-4x fa-baby mb-4"></i>
+              <h3 class="h4 mb-2">Ibu dan Anak</h3>
+              <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan dari ibu dan anak dengan sepenuh hati.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
+    </div>
+  <?php
+    endif;
+  ?>
+
  
     <br><br><br><br>
 
@@ -375,13 +441,14 @@
 </footer>
 <!-- Footer -->
 
-    <!-- Javascript HERE -->
-    
     <!-- Jquery -->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <!-- Popper JS -->
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <!-- Bootstrap js -->
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
+    
+    <!-- Javascript HERE -->
+    
 </body>
 </html>

@@ -23,7 +23,7 @@ define ('BASE_URL',"http://localhost/poliklinik_um/");
  * with your configuration file dbms
  * this web use MySQL for dbms
  */
-$mysqli = new mysqli('localhost','root','','poliklinik');
+$mysqli = new mysqli('localhost','root','7cd81f88','poliklinik');
 // if connection has error
 if($mysqli->connect_error)
 {
