@@ -276,6 +276,7 @@
         switch (value) {
         
             case "catch":
+            location.href = "f_update.php";
             swal("Success!", "Your changes has been saved!", "success");
             break;
         

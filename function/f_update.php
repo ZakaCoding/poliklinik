@@ -24,7 +24,6 @@
     if($mysqli->affected_rows)
     {
         echo "Success";
-        header("location:". BASE_URL .'/page/user');
     }
     else
     {

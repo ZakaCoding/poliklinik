@@ -7,7 +7,7 @@
     $currpass  = $mysqli->real_escape_string($_POST['currpass']);
     $password  = $mysqli->real_escape_string($_POST['password']);
     $password2 = $mysqli->real_escape_string($_POST['password2']);
-    $nim = $mysqli->query("SELECT nim FROM users WHERE name = ?");
+    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
 
     function errorHandling($errCode, $message)
     {
@@ -27,7 +27,7 @@
         $_SESSION['data'] = $request;
         $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
         
-        return header('location:' . BASE_URL . '/page/auth/register.php');
+        return header('location:' . BASE_URL . '/page/user');
     }
 
     $message = '';
@@ -52,11 +52,12 @@
         errorHandling($e->getMessage(),$message);
     }
 
-    $query = "UPDATE `users` SET `password` = $password WHERE `nim` = $nim ";
+    $query = "UPDATE `users` SET `password` = $password WHERE `nim` = ".$user['nim'] ;
 
-    if($mysqli->query($query))
+    if($mysqli->affected_rows)
     {
         echo "Update Success";
+        return header('location:' . BASE_URL . '/page/user');
     }
     else
     {
