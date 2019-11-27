@@ -54,8 +54,13 @@
               <li class="nav-item active">
                 <a class="nav-link" href="#">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Services</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Reservation</a>
+                  <a class="dropdown-item" href="#">Riwayat</a>
+                  <a class="dropdown-item" href="#">Information</a>
+                </div>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
@@ -120,37 +125,42 @@
   </a>
 </div>
 
-  <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white">
-    <div class="bg-primary text-white text-center" style="border-radius: 5px">
+  <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow: 8px 8px 8px #888888">
+    <div class="text-white text-center"><br>
+      <h2 style="color: black">Specialty</h2>
+        <hr>
       <div class="row" style="background-color: white; color: black">
         <div class="col-lg-4 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-seedling mb-4"></i>
-            <h3 class="h4 mb-2">Clean</h3>
-            <p class="text-muted mb-0">Selalu berupaya menciptakan lingkungan yang bersih agar terhindar dari berbagai penyakit.</p>
+            <i class="fas fa-4x fa-stethoscope mb-4"></i>
+            <h3 class="h4 mb-2">Umum</h3>
+            <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan penyakit dan pemeriksaan kesehatan.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-briefcase-medical mb-4"></i>
-            <h3 class="h4 mb-2">Healthy</h3>
-            <p class="text-muted mb-0">Kesehatan warga UM menjadi fokus utama, baik kesehatan fisik maupun psikis.</p>
+            <i class="fas fa-4x fa-tooth mb-4"></i>
+            <h3 class="h4 mb-2">Gigi</h3>
+            <p class="text-muted mb-0">Hadir untuk menangani keluhan seputar gigi dan akan dan pemeriksaan gigi.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-heart mb-4"></i>
-            <h3 class="h4 mb-2">Love</h3>
-            <p class="text-muted mb-0">Selalu berupaya memberikan pelayanan yang terbaik dengan sepenuh hati dan cinta.</p>
+            <i class="fas fa-4x fa-baby mb-4"></i>
+            <h3 class="h4 mb-2">Ibu dan Anak</h3>
+            <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan dari ibu dan anak dengan sepenuh hati.</p>
           </div>
         </div>
       </div>
     </div>
+    <br><br>
+  </div>
  
     <br><br><br><br>
 
     <!-- Project Two Row -->
 
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white">
       <div class="row justify-content-center">
         <div class="col-lg-6">
           <img class="img-fluid" src="asset/img/img1.jpg" alt="">
@@ -196,7 +206,6 @@
           </div>
         </div>
       </div>
-
     </div>
     </section>
 
