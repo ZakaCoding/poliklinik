@@ -233,6 +233,25 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Save Changes</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="p-2"></div>
                     <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
@@ -243,6 +262,28 @@
         </div>
     </div>
 
+    <script>
+        swal("Are you sure, dude?", {
+        buttons: {
+            cancel: "No",
+            catch: {
+            text: "Yes",
+            value: "catch",
+            },
+        },
+        })
+        .then((value) => {
+        switch (value) {
+        
+            case "catch":
+            swal("Success!", "Your changes has been saved!", "success");
+            break;
+        
+            default:
+            swal("Changes has been abort!");
+        }
+        });
+    </script>
 
    <!-- Javascript -->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>

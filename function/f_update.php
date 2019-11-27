@@ -19,9 +19,9 @@
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
 
-    $query = "UPDATE `users` SET `name` = $nama, `email` = $email WHERE `nim` = <?=$user['nim'] ?> ";
+    $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email' WHERE nim =". $user['nim']);
 
-    if($mysqli->query($query))
+    if($mysqli->affected_rows)
     {
         echo "Success";
         header("location:". BASE_URL .'/page/user');
