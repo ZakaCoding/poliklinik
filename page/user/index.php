@@ -57,6 +57,8 @@
     <title>Poliklinik | user</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
+    <!-- Vendor css -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/animate.css/animate.min.css">
     <!-- Sweet alert -->
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.css">
     <!-- Sweet alert 2 -->
@@ -264,29 +266,36 @@
         </div>
     </div>
 
-    <script>
-        Swal("Are you sure, dude?", {
-        buttons: {
-            cancel: "No",
-            catch: {
-            text: "Yes",
-            value: "catch",
-            },
-        },
-        })
-        .then((value) => {
-        switch (value) {
-        
-            case "catch":
-            location.href = "f_update.php";
-            Swal("Success!", "Your changes has been saved!", "success");
-            break;
-        
-            default:
-            Swal("Changes has been abort!");
-        }
-        });
-    </script>
+    <!-- Flash message succes or failed when update data -->
+    <?php
+        if(isset($_SESSION['flashMessage'])) :
+            if($_SESSION['flashMessage']['status'] == 'success'):
+    ?>
+                <!-- Alert -->
+                <div class="container flash-message">
+                    <div class="alert alert-success alert-dismissible fade show animated bounceInDown" role="alert">
+                        <strong><?= $_SESSION['flashMessage']['status'] ?></strong> <?= $_SESSION['flashMessage']['message'] ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+    <?php
+            elseif($_SESSION['flashMessage']['status'] == 'failed'):
+    ?>
+                <!-- Alert -->
+                <div class="container flash-message">
+                    <div class="alert alert-danger alert-dismissible fade show animated bounceInDown" role="alert">
+                        <strong><?= $_SESSION['flashMessage']['status'] ?></strong> <?= $_SESSION['flashMessage']['message'] ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+    <?php
+            endif;
+        endif;
+    ?>
 
    <!-- Javascript Vendor-->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
@@ -294,3 +303,7 @@
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php
+    // Destroy session flash Message
+    unset($_SESSION['flashMessage']);
+?>

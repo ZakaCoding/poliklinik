@@ -19,14 +19,24 @@
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
 
-    $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email' WHERE nim =". $user['nim']);
+    $mysqli->query("UPDATE user SET `name` = '$name', `email` = '$email' WHERE nim =". $user['nim']);
 
-    if($mysqli->affected_rows)
+    if($mysqli->affected_rows > 0)
     {
-        echo "Success";
+        // Redirect with success
+        $_SESSION['flashMessage'] = [
+            'status' => "success",
+            'message' => "your data has been change."
+        ];
+        header('location: '.BASE_URL.'page/user');
     }
     else
     {
-        echo "failed " . $mysqli->error;
+        // Redirect with success
+        $_SESSION['flashMessage'] = [
+            'status' => "failed",
+            'message' => $mysqli->error
+        ];
+        header('location: '.BASE_URL.'page/user');
     }
 ?>

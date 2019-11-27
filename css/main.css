@@ -180,4 +180,12 @@
     border-radius: 2px;
 }
 
+/* Flash Message */
+.flash-message {
+  position: fixed;
+  left: 50%;
+  top: 16%;
+  transform: translate(-50%,0);
+}
+
 
