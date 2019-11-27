@@ -79,8 +79,17 @@
                 if(isset($_SESSION['user'])) :
                   if($_SESSION['user']['login'] == true):
               ?>
-                  <a class="text-white">Hello, <?= $_SESSION['user']['name'] ?></a> &nbsp;
-                  <a class="text-white" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+              <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Hello, <?= $_SESSION['user']['name'] ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="<?= BASE_URL ?>page/user">Profile</a>
+                  <a class="dropdown-item" href="#">Manage Reservation</a>
+                  <a class="dropdown-item" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                </div>
+              </div>
+
                 <?php endif; ?>
               <?php else: ?>
                 <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>

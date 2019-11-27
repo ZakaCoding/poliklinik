@@ -1,5 +1,52 @@
 <?php 
     include_once("../../config/config.php");
+    session_start();
+
+    // check user has login or nah
+    if(isset($_SESSION['user']))
+    {   
+        // First check status is login on session data
+        if($_SESSION['user']['login']) //if true
+        {
+            // Then check all data session is match
+            $query = $mysqli->query("SELECT * FROM `users` WHERE email = '". $_SESSION['user']['email'] ."' AND remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
+            if($query->num_rows == 0)
+            {
+                // Redirect to login page
+                // die("This 1");
+                header("location: ".BASE_URL.'page/auth/login.php');
+                exit(1);
+            }
+        }
+        else
+        {
+            // Redirect to login page
+            // die("this 2");
+            header("location: ".BASE_URL.'page/auth/login.php');
+            exit(1);
+        }
+    }
+    else
+    {
+        // Redirect to login page
+        // die("This 3");
+        header("location: ".BASE_URL.'page/auth/login.php');
+        exit(1);
+    }
+    
+    // Data disini bray >>
+    // get data from database
+    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    if($user->num_rows > 0)
+    {
+        // Fetch to array data
+        $user = $user->fetch_assoc();
+
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +64,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Poliklinik</a>
+            <a class="navbar-brand" href="<?=BASE_URL ?>">Poliklinik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,6 +87,26 @@
                 <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <?php
+                if(isset($_SESSION['user'])) :
+                  if($_SESSION['user']['login'] == true):
+                ?>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hello, <?= $_SESSION['user']['name'] ?>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <a class="dropdown-item" href="#">Manage Reservation</a>
+                    <a class="dropdown-item" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                    </div>
+                </div>
+
+                    <?php endif; ?>
+                <?php else: ?>
+                    <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
+                    <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
+                <?php endif; ?>
                 </form>
             </div>
         </div>
@@ -70,7 +137,7 @@
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-softblue" name="name" id="inputName">
+                                    <input type="text" class="form-control border-softblue" name="name" id="inputName" value="<?= $user['name'] ?>">
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -78,7 +145,7 @@
                             <div class="form-group row">
                                 <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail">
+                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
                                     <small id="emailHelp" class="form-text text-muted">    
                                     * Change with your active email and dont forget to verification.
                                     </small>
@@ -135,9 +202,9 @@
                         <div class="p-2"></div>
                         <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
                             <div class="form-group row">
-                                <label for="inputCurrent" class="col-sm-2 col-form-label">Current Password</label>
+                                <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" name="currentPassword" id="inputCurrent" value="<?=$password?>">
+                                    <input type="password" class="form-control border-softblue" name="currpass" id="inputCurr">
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -166,6 +233,25 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Save Changes</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="p-2"></div>
                     <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
@@ -176,6 +262,29 @@
         </div>
     </div>
 
+    <script>
+        swal("Are you sure, dude?", {
+        buttons: {
+            cancel: "No",
+            catch: {
+            text: "Yes",
+            value: "catch",
+            },
+        },
+        })
+        .then((value) => {
+        switch (value) {
+        
+            case "catch":
+            location.href = "f_update.php";
+            swal("Success!", "Your changes has been saved!", "success");
+            break;
+        
+            default:
+            swal("Changes has been abort!");
+        }
+        });
+    </script>
 
    <!-- Javascript -->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>

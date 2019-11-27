@@ -1,10 +1,38 @@
 <?php 
     include_once('../../config/config.php'); 
     session_start();
+
+    // Check if user has login and force redirect to landing page
+    // user cant see this login page or register
+    // check user has login or nah
+    if(isset($_SESSION['user']))
+    {   
+        // Redirect to login page
+        // die("This 1");
+        header("location: ".BASE_URL);
+        exit(1);
+
+        /**
+         * i think this gate is weak >>> if(isset($_SESSION['user])) <<<
+         * but if this gate can access by user(superuser/hacker)
+         * we will fix this bug
+         * and for hacker or whoever you are. if now this hole, you can sent bug data to developer
+         * on github https://github.com/ZakaCoding/poliklinik.git
+         * Head of Developer --> ZakaCoding
+         * And the other member was built this project :
+         * --> Rizki Nisa
+         * --> Setya Rahadi
+         * --> Oktarian
+         * 
+         * Code last Built 26/11/2019 21:33
+         */
+    }
+
     // get error data if any
     $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
     $invalid_email = '';
     $invalid_password = '';
+    $loginFailed = '';
 
     if($error != NULL)
     {
@@ -26,6 +54,10 @@
             case 'ERR_INVALID_PASSWORD':
                 # code...
                 $invalid_password = 'is-invalid';
+                break;
+            case 'ERR_LOGIN_FAILED':
+                # code...
+                $loginFailed = 'is-invalid';
                 break;
             default:
                 # code...
@@ -89,7 +121,18 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-lg btn-block" name="sign" id="button">Sign</button>
-                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/login.php' ?>">Log in</a></small>
+                                <?php
+                                    if($loginFailed == 'is-invalid'):
+                                ?>
+                                    <div class="p-2"></div>
+                                    <div class="alert alert-warning alert-dismissible fade show animated shake" role="alert">
+                                        <strong>Hmmm :(</strong><?= $message; ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <?php endif; ?>
+                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/register.php' ?>">Sign up</a></small>
                             </div>
                         </form>
                     </div>
