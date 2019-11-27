@@ -47,6 +47,31 @@
         // you want data email then code is
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
+
+    /**
+     * System Error handling
+     */
+    // get error data if any
+    $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
+    $invalid_name = '';
+    if($error != NULL)
+    {
+        // has error on form input
+        $message = $error['message'];
+        switch ($error['errorCode']) {
+            case 'ERR_EMPTY_NAME':
+                # code...
+                $invalid_name = 'is-invalid';
+                break;
+            case 'ERR_INVALID_NAME':
+                # code...
+                $invalid_name = 'is-invalid';
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +154,7 @@
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <!-- Copy this -->
+                <!-- Error Handling php -->
                 <h2 class="roboto-regular p-2">Edit Profile</h2>
                 <div class="row p-4">
                     <div class="col bg-white border-rounded-md  p-3">
@@ -141,7 +166,10 @@
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control border-softblue" name="name" id="inputName" value="<?= $user['name'] ?>">
+                                    <input type="text" class="form-control border-softblue <?= $invalid_name ?>" name="name" id="inputName" value="<?= $user['name'] ?>">
+                                    <div class="invalid-feedback">
+                                        <?= $message; ?>
+                                    </div>
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -306,4 +334,5 @@
 <?php
     // Destroy session flash Message
     unset($_SESSION['flashMessage']);
+    unset($_SESSION['error']);
 ?>
