@@ -1,4 +1,11 @@
 <?php
+    // Import PHPMailer classes into the global namespace
+    // These must be at the top of your script, not inside a function
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    // Load composer's AutoLoader
+    require '../source/vendor/autoload.php';
+
     // Start session
     session_start();
     // get connection to database
@@ -66,7 +73,7 @@
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
 
-    $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email' WHERE nim =". $user['nim']);
+    $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `updated_at` = NOW() WHERE nim =". $user['nim']);
 
     if($mysqli->affected_rows > 0)
     {
