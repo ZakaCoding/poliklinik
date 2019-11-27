@@ -16,15 +16,7 @@
             "errorCode" => $errCode
         ];
         
-        // create temp data if any error
-        $request = [
-            "name" => $name,
-            "nim" => $nim,
-            "email" => $email
-        ];
-        
         // create session error
-        $_SESSION['data'] = $request;
         $_SESSION['error'] = [ "errorCode" => $errCode, "message" => $message ];
         
         return header('location:' . BASE_URL . '/page/user');
@@ -37,7 +29,7 @@
         if($currpass != password_verify($password,$data['password']))
         {
             $message = "Your typing password is not match with your current password";
-            throw new Exception("ERR_PASSWORD_MISMATCH");
+            throw new Exception("ERR_WRONG_PASSWORD");
         }
         else
         {
@@ -47,20 +39,42 @@
                 $message = "Your typing password is not match";
                 throw new Exception("ERR_PASSWORD_MISMATCH");
             }
+        }
     } catch (Exception $e) {
         
         errorHandling($e->getMessage(),$message);
+        exit();
     }
 
-    $query = "UPDATE `users` SET `password` = $password WHERE `nim` = ".$user['nim'] ;
-
-    if($mysqli->affected_rows)
+    if($user->num_rows > 0)
     {
-        echo "Update Success";
-        return header('location:' . BASE_URL . '/page/user');
+        // Fetch to array data
+        $user = $user->fetch_assoc();
+
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+    }
+
+    $mysqli->query("UPDATE users SET `password` = $password WHERE `nim` = ".$user['nim']) ;
+
+    if($mysqli->affected_rows > 0)
+    {
+       // Redirect with success
+       $_SESSION['flashMessage'] = [
+        'status' => "success",
+        'message' => "your data has been change."
+        ];
+        header('location: '.BASE_URL.'page/user');
     }
     else
     {
-        echo "Failed " . $mysqli->error;
+        // Redirect with success
+        $_SESSION['flashMessage'] = [
+            'status' => "failed",
+            'message' => $mysqli->error
+        ];
+        header('location: '.BASE_URL.'page/user');
     }
 ?>

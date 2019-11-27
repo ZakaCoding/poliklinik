@@ -54,6 +54,7 @@
     // get error data if any
     $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
     $invalid_name = '';
+    $invalid_pass = '';
     if($error != NULL)
     {
         // has error on form input
@@ -66,6 +67,14 @@
             case 'ERR_INVALID_NAME':
                 # code...
                 $invalid_name = 'is-invalid';
+                break;
+            case 'ERR_WRONG_PASSWORD':
+                # code...
+                $invalid_pass = 'is-invalid';
+                break;
+            case 'ERR_PASSWORD_MISMATCH':
+                # code...
+                $invalid_pass = 'is-invalid';
                 break;
             default:
                 # code...
@@ -236,7 +245,10 @@
                             <div class="form-group row">
                                 <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" name="currpass" id="inputCurr">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_pass ?>" name="currpass" id="inputCurr">
+                                </div>
+                                <div class="invalid-feedback">
+                                    <?= $message; ?>
                                 </div>
                             </div>
                             <!-- spacer -->
