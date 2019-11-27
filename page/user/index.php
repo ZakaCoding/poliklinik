@@ -122,7 +122,7 @@
                 ?>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hello, <?= $_SESSION['user']['name'] ?>
+                    Hello, <?php $name = explode(' ',$user['name']); echo $name[0]; ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Profile</a>
