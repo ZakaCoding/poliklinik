@@ -57,8 +57,8 @@
     <title>Poliklinik | user</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
-    <script src="jquery-3.3.1.slim.min.js"></script>
-    <script src="bootstrap.min.js"></script>
+    <!-- Sweet alert -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.css">
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
@@ -286,7 +286,9 @@
         });
     </script>
 
-   <!-- Javascript -->
+   <!-- Sweet alert 2 -->
+   <script src="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+   <!-- Javascript Vendor-->
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
