@@ -46,7 +46,7 @@
              */
             if(!preg_match("/^[a-zA-Z_\s]*$/",$name))
             {
-                $message = "This field can only be filled with the alphabet excluding numbers or characters.";
+                $message = "This field can only be filled with the alphabet excluding numbers or characters. Your request to change is <strong>".$name.'</strong>';
                 throw new Exception("ERR_INVALID_NAME");
             }
         }
