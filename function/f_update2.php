@@ -7,8 +7,19 @@
     $currpass  = $mysqli->real_escape_string($_POST['currpass']);
     $password  = $mysqli->real_escape_string($_POST['password']);
     $password2 = $mysqli->real_escape_string($_POST['password2']);
-    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
 
+    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    if($user->num_rows > 0)
+    {
+        // Fetch to array data
+        $data = $user->fetch_assoc();
+
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+    }
+    
     function errorHandling($errCode, $message)
     {
         global $name, $nim, $email;
@@ -26,38 +37,58 @@
 
     try {
         // Check form password and confirm
-        if($currpass != password_verify($password,$data['password']))
+        if(empty($currpass))
         {
-            $message = "Your typing password is not match with your current password";
-            throw new Exception("ERR_WRONG_PASSWORD");
+            $message = "This field is required.";
+            throw new Exception("ERR_EMPTY_CURR");
+        }
+        else
+        {
+            // Check form password and confirm
+            if(!password_verify($currpass,$data['password']))
+            {
+                $message = "Your typing password is not match with your current password";
+                throw new Exception("ERR_INVALID_CURR");
+            }
+        }
+
+        if(empty($password))
+        {
+            $message = "This field is required.";
+            throw new Exception("ERR_EMPTY_PASSWORD");
+        }
+        else
+        {
+            // check password min length 8 and inlcude string,number,character
+            if(strlen($password) < 8)
+            {
+                $message = "Password min 8 length and with Number and character";
+                throw new Exception("WARNING_PASSWORD_LIMIT");
+            }
+        }
+
+        if(empty($password2))
+        {
+            die("This dude");
+            $message = "This field is required.";
+            throw new Exception("ERR_EMPTY_REPASS");
         }
         else
         {
             // Check password and confirm is match
-            if($password != $confirmPassword)
+            if($password != $password2)
             {
                 $message = "Your typing password is not match";
                 throw new Exception("ERR_PASSWORD_MISMATCH");
             }
         }
+
     } catch (Exception $e) {
-        
         errorHandling($e->getMessage(),$message);
         exit();
     }
 
-    if($user->num_rows > 0)
-    {
-        // Fetch to array data
-        $user = $user->fetch_assoc();
-
-        // How to use this data
-        // like this example.
-        // you want data email then code is
-        // $user['email'] --> output program "zakanoor@outlook.co.id"
-    }
-
-    $mysqli->query("UPDATE users SET `password` = $password WHERE `nim` = ".$user['nim']) ;
+    $mysqli->query("UPDATE users SET `password` = '$password' WHERE `nim` = ".$user['nim']) ;
 
     if($mysqli->affected_rows > 0)
     {

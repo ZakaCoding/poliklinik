@@ -176,7 +176,7 @@
                 <input type="date" class="form-control dateselect" required="required" id="inputDate">
               </div>
               <div class="form-group col-md-4">
-                <label for="inputState">State</label>
+                <label for="inputState">Poli</label>
                 <select id="inputState" class="form-control">
                   <option selected>Choose...</option>
                   <option>...</option>

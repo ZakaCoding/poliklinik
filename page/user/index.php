@@ -53,8 +53,11 @@
      */
     // get error data if any
     $error = isset($_SESSION['error']) ? $_SESSION['error'] : NULL;
+    // die(var_dump($error));
     $invalid_name = '';
-    $invalid_pass = '';
+    $invalid_current = '';
+    $invalid_password = '';
+    $invalid_repass = '';
     if($error != NULL)
     {
         // has error on form input
@@ -64,17 +67,37 @@
                 # code...
                 $invalid_name = 'is-invalid';
                 break;
-            case 'ERR_INVALID_NAME':
+                case 'ERR_INVALID_NAME':
+                    # code...
+                    $invalid_name = 'is-invalid';
+                    break;
+            case 'ERR_EMPTY_CURR':
                 # code...
-                $invalid_name = 'is-invalid';
+                $invalid_current = 'is-invalid';
+                break;
+            case 'ERR_EMPTY_PASSWORD':
+                # code...
+                $invalid_password = 'is-invalid';
+                break;
+            case 'ERR_EMPTY_REPASS':
+                # code...
+                $invalid_repass = 'is-invalid';
+                break;
+            case 'WARNING_PASSWORD_LIMIT':
+                # code...
+                $invalid_password = 'is-invalid';
                 break;
             case 'ERR_WRONG_PASSWORD':
                 # code...
-                $invalid_pass = 'is-invalid';
+                $invalid_password = 'is-invalid';
+                break;
+            case 'ERR_INVALID_CURR':
+                # code...
+                $invalid_current = 'is-invalid';
                 break;
             case 'ERR_PASSWORD_MISMATCH':
                 # code...
-                $invalid_pass = 'is-invalid';
+                $invalid_repass = 'is-invalid';
                 break;
             default:
                 # code...
@@ -245,10 +268,10 @@
                             <div class="form-group row">
                                 <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue <?= $invalid_pass ?>" name="currpass" id="inputCurr">
-                                </div>
-                                <div class="invalid-feedback">
-                                    <?= $message; ?>
+                                    <input type="password" class="form-control border-softblue <?= $invalid_current ?>" name="currpass" id="inputCurr">
+                                    <div class="invalid-feedback">
+                                        <?= $message; ?>
+                                    </div>
                                 </div>
                             </div>
                             <!-- spacer -->
@@ -256,7 +279,10 @@
                             <div class="form-group row">
                                 <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_password ?>" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <div class="invalid-feedback">
+                                        <?= $message; ?>
+                                    </div>
                                     <small id="passwordHelp" class="form-text text-muted">    
                                         * Make sure it's at least 8 characters including a number and a lowercase letter.
                                     </small>
@@ -267,7 +293,10 @@
                             <div class="form-group row">
                                 <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue" name="confirmPassword" id="inputConfirm" name="password2">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_repass ?>" id="inputConfirm" name="password2">
+                                    <div class="invalid-feedback">
+                                        <?= $message ?>
+                                    </div>
                                 </div>
                             </div>
                             <!-- spacer -->
