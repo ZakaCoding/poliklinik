@@ -277,14 +277,15 @@
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="form-group row">
-                                <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
+                                <label for="pwdInput" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue <?= $invalid_password ?>" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_password ?>" aria-describedby="passwordlHelp" name="password" id="pwdInput">
                                     <div class="invalid-feedback">
                                         <?= $message; ?>
                                     </div>
-                                    <small id="passwordHelp" class="form-text text-muted">    
-                                        * Make sure it's at least 8 characters including a number and a lowercase letter.
+                                    <small id="passwordlHelp" class="form-text text-muted">
+                                    Make sure it's <span id="min-length">at least 8 characters</span>
+                                    <span id="validate-number"> including a number</span> and a <span id="lowcase">lowercase letter.</span>
                                     </small>
                                 </div>
                             </div>
@@ -370,6 +371,8 @@
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
+    <!-- Javascript here -->
+    <script src="<?= BASE_URL ?>js/register_validation.js"></script>
 </body>
 </html>
 <?php
