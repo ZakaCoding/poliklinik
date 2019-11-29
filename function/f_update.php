@@ -79,7 +79,7 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "Success",
+            'status' => "success",
             'message' => "Your data has been change."
         ];
         header('location: '.BASE_URL.'page/user');

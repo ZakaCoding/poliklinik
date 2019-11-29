@@ -90,13 +90,13 @@
     //hash password
     $pwd = password_hash($password,PASSWORD_DEFAULT);
 
-    $mysqli->query("UPDATE users SET `password` = '$pwd' WHERE nim = ". $data['nim']);
+    $mysqli->query("UPDATE users SET `password` = '$pwd', `updated_at` = NOW() WHERE nim = ". $data['nim']);
 
     if($mysqli->affected_rows > 0)
     {
        // Redirect with success
        $_SESSION['flashMessage'] = [
-        'status' => "Success",
+        'status' => "success",
         'message' => "your data has been change."
         ];
         header('location: '.BASE_URL.'page/user');
@@ -105,7 +105,7 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "Failed",
+            'status' => "failed",
             'message' => $mysqli->error
         ];
         header('location: '.BASE_URL.'page/user');
