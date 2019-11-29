@@ -8,11 +8,11 @@
     $password  = $mysqli->real_escape_string($_POST['password']);
     $password2 = $mysqli->real_escape_string($_POST['password2']);
 
-    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
-    if($user->num_rows > 0)
+    $data = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    if($data->num_rows > 0)
     {
         // Fetch to array data
-        $data = $user->fetch_assoc();
+        $data = $data->fetch_assoc();
         // die("sadasa");
         // How to use this data
         // like this example.
@@ -87,7 +87,18 @@
         exit();
     }
 
-    $mysqli->query("UPDATE users SET `password` = '$password' WHERE nim = ". $user['nim']);
+    if($data->num_rows > 0)
+    {
+        // Fetch to array data
+        $data = $data->fetch_assoc();
+        //die("sadasa");
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+    }
+
+    $mysqli->query("UPDATE users SET `password` = '$password' WHERE nim = ". $data['nim']);
 
     if($mysqli->affected_rows > 0)
     {
