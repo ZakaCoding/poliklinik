@@ -222,7 +222,7 @@
         if($mail->Send())
         {
             $_SESSION['success'] = [
-                'status' => 'success',
+                'status' => 'Success',
                 'message' => 'You have successfully created your account. Please check your email for confirmation.'
             ];
             header("location:". BASE_URL .'/page/auth/register.php');
@@ -232,7 +232,7 @@
             // Error code
             // [77001] Account has create but error when sent email
             $_SESSION['failed'] = [
-                'status' => 'failed',
+                'status' => 'Failed',
                 'message' => 'Something went wrong. your account has ben create, but have error. Call admin and show this error code [77001]'
             ];
             header("location:". BASE_URL .'/page/auth/register.php');

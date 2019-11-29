@@ -8,12 +8,12 @@
     $password  = $mysqli->real_escape_string($_POST['password']);
     $password2 = $mysqli->real_escape_string($_POST['password2']);
 
-    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
-    if($user->num_rows > 0)
+    $data = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    if($data->num_rows > 0)
     {
         // Fetch to array data
-        $data = $user->fetch_assoc();
-
+        $data = $data->fetch_assoc();
+        // die("sadasa");
         // How to use this data
         // like this example.
         // you want data email then code is
@@ -87,8 +87,15 @@
         exit();
     }
 
+<<<<<<< HEAD
     die($user['nim']);
     $mysqli->query("UPDATE users SET `password` = '$password' WHERE `nim` = ".$user['nim']) ;
+=======
+    //hash password
+    $pwd = password_hash($password,PASSWORD_DEFAULT);
+
+    $mysqli->query("UPDATE users SET `password` = '$pwd', `updated_at` = NOW() WHERE nim = ". $data['nim']);
+>>>>>>> f21948787a1e054611791e1c52d7ce22655b71a7
 
     if($mysqli->affected_rows > 0)
     {
