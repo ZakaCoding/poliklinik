@@ -292,18 +292,18 @@
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="form-group row">
-                                <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
+                                <label for="pwdConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue <?= $invalid_repass ?>" id="inputConfirm" name="password2">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_repass ?>" id="pwdConfirm" name="password2">
                                     <div class="invalid-feedback">
-                                        <?= $message ?>
+                                        <?= empty($message) ? "Your confirm password do not match" : $message; ?>
                                     </div>
                                 </div>
                             </div>
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="clearfix">
-                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                                <button id="button" type="submit" class="btn btn-outline-success float-right">Save Changes</button>
                             </div>
                         </form>
                     </div>
