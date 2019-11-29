@@ -87,24 +87,16 @@
         exit();
     }
 
-    if($data->num_rows > 0)
-    {
-        // Fetch to array data
-        $data = $data->fetch_assoc();
-        //die("sadasa");
-        // How to use this data
-        // like this example.
-        // you want data email then code is
-        // $user['email'] --> output program "zakanoor@outlook.co.id"
-    }
+    //hash password
+    $pwd = password_hash($password,PASSWORD_DEFAULT);
 
-    $mysqli->query("UPDATE users SET `password` = '$password' WHERE nim = ". $data['nim']);
+    $mysqli->query("UPDATE users SET `password` = '$pwd' WHERE nim = ". $data['nim']);
 
     if($mysqli->affected_rows > 0)
     {
        // Redirect with success
        $_SESSION['flashMessage'] = [
-        'status' => "success",
+        'status' => "Success",
         'message' => "your data has been change."
         ];
         header('location: '.BASE_URL.'page/user');
@@ -113,7 +105,7 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "failed",
+            'status' => "Failed",
             'message' => $mysqli->error
         ];
         header('location: '.BASE_URL.'page/user');

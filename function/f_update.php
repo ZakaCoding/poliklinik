@@ -79,8 +79,8 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "success",
-            'message' => "your data has been change."
+            'status' => "Success",
+            'message' => "Your data has been change."
         ];
         header('location: '.BASE_URL.'page/user');
     }
@@ -88,7 +88,7 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "failed",
+            'status' => "Failed",
             'message' => $mysqli->error
         ];
         header('location: '.BASE_URL.'page/user');
