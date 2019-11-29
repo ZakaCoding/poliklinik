@@ -87,15 +87,10 @@
         exit();
     }
 
-<<<<<<< HEAD
-    die($user['nim']);
-    $mysqli->query("UPDATE users SET `password` = '$password' WHERE `nim` = ".$user['nim']) ;
-=======
     //hash password
     $pwd = password_hash($password,PASSWORD_DEFAULT);
 
     $mysqli->query("UPDATE users SET `password` = '$pwd', `updated_at` = NOW() WHERE nim = ". $data['nim']);
->>>>>>> f21948787a1e054611791e1c52d7ce22655b71a7
 
     if($mysqli->affected_rows > 0)
     {
