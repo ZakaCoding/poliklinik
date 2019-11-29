@@ -13,7 +13,7 @@
     {
         // Fetch to array data
         $data = $user->fetch_assoc();
-
+        // die("sadasa");
         // How to use this data
         // like this example.
         // you want data email then code is
@@ -69,7 +69,6 @@
 
         if(empty($password2))
         {
-            die("This dude");
             $message = "This field is required.";
             throw new Exception("ERR_EMPTY_REPASS");
         }
@@ -88,7 +87,7 @@
         exit();
     }
 
-    $mysqli->query("UPDATE users SET `password` = '$password' WHERE `nim` = ".$user['nim']) ;
+    $mysqli->query("UPDATE users SET `password` = '$password' WHERE nim = ". $user['nim']);
 
     if($mysqli->affected_rows > 0)
     {
