@@ -69,7 +69,6 @@
 
         if(empty($password2))
         {
-            die("This dude");
             $message = "This field is required.";
             throw new Exception("ERR_EMPTY_REPASS");
         }
@@ -88,6 +87,7 @@
         exit();
     }
 
+    die($user['nim']);
     $mysqli->query("UPDATE users SET `password` = '$password' WHERE `nim` = ".$user['nim']) ;
 
     if($mysqli->affected_rows > 0)
