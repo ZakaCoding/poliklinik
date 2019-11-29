@@ -9,11 +9,14 @@
         if($_SESSION['user']['login']) //if true
         {
             // Then check all data session is match
-            $query = $mysqli->query("SELECT * FROM `users` WHERE email = '". $_SESSION['user']['email'] ."' AND remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
+            // die($_SESSION['user']['email']);
+            $query = $mysqli->query("SELECT * FROM `users` WHERE remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
             if($query->num_rows == 0)
             {
+                // Remove session login
+                unset($_SESSION['user']);
+                session_destroy();
                 // Redirect to login page
-                // die("This 1");
                 header("location: ".BASE_URL.'page/auth/login.php');
                 exit(1);
             }
@@ -36,7 +39,7 @@
     
     // Data disini bray >>
     // get data from database
-    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -211,8 +214,21 @@
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
                                     <small id="emailHelp" class="form-text text-muted">    
-                                    * Change with your active email and dont forget to verification.
+                                        * Change with your active email and dont forget to verification.
                                     </small>
+
+                                    <!-- Alert if user has change their email -->
+                                    <?php
+                                        if($_SESSION['user']['email'] != $user['email']) :
+                                    ?>
+                                        <div class="p-1"></div>
+                                        <div class="alert alert-primary">
+                                            Your email has change. Please confirm your email so you can login again.
+                                        </div>
+                                    <?php
+                                        endif;
+                                    ?>
+
                                 </div>
                             </div>                    
                             <!-- spacer -->
