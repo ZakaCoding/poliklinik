@@ -331,6 +331,21 @@
             </div>
             <div class="tab-pane fade" id="pills-reservation" role="tabpanel" aria-labelledby="pills-reservation-tab">
                 <h2 class="roboto-regular p-2">Edit Reservation</h2>
+                <div class="row p-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                        <th>No</th>
+                        <th>Keluhan</th>
+                        <th>Poli yang Dituju</th>
+                        <th>Tanggal Reservasi</th>
+                        <th>Edit Reservasi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>   
+                    </table>
+                </div>
             </div>
         </div>
     </div>
