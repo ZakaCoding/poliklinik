@@ -201,7 +201,7 @@
   <?php
     else:
   ?>
-    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow: 8px 8px 8px #888888">
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 rgba(53,64,90,.2);">
       <div class="text-white text-center"><br>
         <h2 style="color: black">Specialty</h2>
           <hr>
