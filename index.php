@@ -173,18 +173,23 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="inputDate">Tanggal check up</label>
-                <input type="date" class="form-control dateselect" required="required" id="inputDate">
+                <input type="date" class="form-control border-softblue dateselect" required="required" id="inputDate">
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">Poli</label>
-                <select id="inputState" class="form-control">
+                <select id="inputState" class="form-control border-softblue">
                   <option selected>Choose...</option>
                   <option>...</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
                 <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+                <input type="text" class="form-control border-softblue" id="inputZip">
+              </div>
+            </div>
+            <div class="clearfix">
+              <div class="float-right">
+                <button type="submit" name="reserve" class="btn btn-success">Checkup now</button>
               </div>
             </div>
           </form>
@@ -196,7 +201,7 @@
   <?php
     else:
   ?>
-    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow: 8px 8px 8px #888888">
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 rgba(53,64,90,.2);">
       <div class="text-white text-center"><br>
         <h2 style="color: black">Specialty</h2>
           <hr>
