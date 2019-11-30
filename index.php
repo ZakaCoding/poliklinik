@@ -173,18 +173,18 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="inputDate">Tanggal check up</label>
-                <input type="date" class="form-control dateselect" required="required" id="inputDate">
+                <input type="date" class="form-control border-softblue dateselect" required="required" id="inputDate">
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">Poli</label>
-                <select id="inputState" class="form-control">
+                <select id="inputState" class="form-control border-softblue">
                   <option selected>Choose...</option>
                   <option>...</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
                 <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip">
+                <input type="text" class="form-control border-softblue" id="inputZip">
               </div>
             </div>
             <div class="clearfix">
