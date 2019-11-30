@@ -73,7 +73,15 @@
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
 
-    $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `updated_at` = NOW() WHERE nim =". $user['nim']);
+
+    if($email != $_SESSION['user']['email'])
+    {
+        $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `email_verified_at` = NULL, `updated_at` = NOW() WHERE nim =". $user['nim']);
+    }
+    else
+    {
+        $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `updated_at` = NOW() WHERE nim =". $user['nim']);
+    }
 
     if($mysqli->affected_rows > 0)
     {
@@ -88,7 +96,7 @@
     {
         // Redirect with success
         $_SESSION['flashMessage'] = [
-            'status' => "Failed",
+            'status' => "failed",
             'message' => $mysqli->error
         ];
         header('location: '.BASE_URL.'page/user');

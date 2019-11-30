@@ -9,11 +9,14 @@
         if($_SESSION['user']['login']) //if true
         {
             // Then check all data session is match
-            $query = $mysqli->query("SELECT * FROM `users` WHERE email = '". $_SESSION['user']['email'] ."' AND remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
+            // die($_SESSION['user']['email']);
+            $query = $mysqli->query("SELECT * FROM `users` WHERE remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
             if($query->num_rows == 0)
             {
+                // Remove session login
+                unset($_SESSION['user']);
+                session_destroy();
                 // Redirect to login page
-                // die("This 1");
                 header("location: ".BASE_URL.'page/auth/login.php');
                 exit(1);
             }
@@ -36,7 +39,7 @@
     
     // Data disini bray >>
     // get data from database
-    $user = $mysqli->query("SELECT * FROM users WHERE email = '". $_SESSION['user']['email'] . "'");
+    $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -211,8 +214,21 @@
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
                                     <small id="emailHelp" class="form-text text-muted">    
-                                    * Change with your active email and dont forget to verification.
+                                        * Change with your active email and dont forget to verification.
                                     </small>
+
+                                    <!-- Alert if user has change their email -->
+                                    <?php
+                                        if($_SESSION['user']['email'] != $user['email']) :
+                                    ?>
+                                        <div class="p-1"></div>
+                                        <div class="alert alert-primary">
+                                            Your email has change. Please confirm your email so you can login again.
+                                        </div>
+                                    <?php
+                                        endif;
+                                    ?>
+
                                 </div>
                             </div>                    
                             <!-- spacer -->
@@ -277,32 +293,33 @@
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="form-group row">
-                                <label for="inputNew" class="col-sm-2 col-form-label">New Password</label>
+                                <label for="pwdInput" class="col-sm-2 col-form-label">New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue <?= $invalid_password ?>" aria-describedby="passwordlHelp" name="password" id="inputNew">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_password ?>" aria-describedby="passwordlHelp" name="password" id="pwdInput">
                                     <div class="invalid-feedback">
                                         <?= $message; ?>
                                     </div>
-                                    <small id="passwordHelp" class="form-text text-muted">    
-                                        * Make sure it's at least 8 characters including a number and a lowercase letter.
+                                    <small id="passwordlHelp" class="form-text text-muted">
+                                    Make sure it's <span id="min-length">at least 8 characters</span>
+                                    <span id="validate-number"> including a number</span> and a <span id="lowcase">lowercase letter.</span>
                                     </small>
                                 </div>
                             </div>
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="form-group row">
-                                <label for="inputConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
+                                <label for="pwdConfirm" class="col-sm-2 col-form-label">Retype New Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control border-softblue <?= $invalid_repass ?>" id="inputConfirm" name="password2">
+                                    <input type="password" class="form-control border-softblue <?= $invalid_repass ?>" id="pwdConfirm" name="password2">
                                     <div class="invalid-feedback">
-                                        <?= $message ?>
+                                        <?= empty($message) ? "Your confirm password do not match" : $message; ?>
                                     </div>
                                 </div>
                             </div>
                             <!-- spacer -->
                             <div class="p-2"></div>
                             <div class="clearfix">
-                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                                <button id="button" type="submit" class="btn btn-outline-success float-right">Save Changes</button>
                             </div>
                         </form>
                     </div>
@@ -385,6 +402,8 @@
     <script src="<?= BASE_URL ?>vendor/js/jquery-3.3.1.slim.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/popper.min.js"></script>
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
+    <!-- Javascript here -->
+    <script src="<?= BASE_URL ?>js/register_validation.js"></script>
 </body>
 </html>
 <?php
