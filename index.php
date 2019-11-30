@@ -187,6 +187,11 @@
                 <input type="text" class="form-control" id="inputZip">
               </div>
             </div>
+            <div class="clearfix">
+              <div class="float-right">
+                <button type="submit" name="reserve" class="btn btn-success">Checkup now</button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
