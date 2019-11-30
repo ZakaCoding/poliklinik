@@ -370,7 +370,7 @@
     <!-- Flash message succes or failed when update data -->
     <?php
         if(isset($_SESSION['flashMessage'])) :
-            if($_SESSION['flashMessage']['status'] == 'success'):
+            if($_SESSION['flashMessage']['status'] == 'Success'):
     ?>
                 <!-- Alert -->
                 <div class="container flash-message">
@@ -382,7 +382,7 @@
                     </div>
                 </div>
     <?php
-            elseif($_SESSION['flashMessage']['status'] == 'failed'):
+            elseif($_SESSION['flashMessage']['status'] == 'Failed'):
     ?>
                 <!-- Alert -->
                 <div class="container flash-message">
