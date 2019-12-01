@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Poliklinik UM</title>
+    <title>Poliklinik UM - Home</title>
 
 
 
@@ -39,25 +39,65 @@
   background-attachment:scroll;
   background-size:cover
  }
+
+ .btn-poli
+ {
+   background-color: #00ACDF;
+   border-color: white;
+   border-radius: 18px;
+   color: white;
+   border-width: 2px;
+ }
+
+ .btn-poli:hover
+ {
+   background-color: white;
+   border-color: #00ACDF;
+   color: #00ACDF;
+ }
+
+ .skills-icon i {
+  display: inline-block;
+  height: 25vh;
+  width: 25vh;
+  color: #fff;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 11vh;
+  line-height: 25vh;
+  margin-right: 3.5%;
+  margin-left: 3.5%;
+  background-color: #00ACDF;
+}
+
+.text-poli
+{
+  color: #00ACDF;
+}
+
+.nav-poli : hover
+{
+  color: black;
+}
     </style>
 </head>
 <body>
 
   <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Poliklinik</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #00ACDF; color: white">
+      <div class="container-fluid" style="background-color: #00ACDF">
+        <a class="navbar-brand" href="#">Poliklinik UM</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="background-color: #00ACDF">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link text-white" href="#">Home</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Services</a>
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">Services</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Reservation</a>
                   <a class="dropdown-item" href="#">Riwayat</a>
@@ -65,10 +105,10 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link text-white" href="#">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
+                <a class="nav-link text-white" href="#">Help</a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -94,7 +134,7 @@
 
                 <?php endif; ?>
               <?php else: ?>
-                <a class="btn btn-outline-success my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php">Login</a>
+                <a class="btn btn-poli my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php" style="width: 80px">Login</a>
                 <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
               <?php endif; ?>
             </form>
@@ -115,15 +155,27 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="asset/img/img1.jpg" style="width: 100%;
-  height: auto" alt="">
+  height: auto; filter: brightness(65%)" alt="">
+        <div class="carousel-caption" style="bottom: 200px">
+          <h1>Selamat Datang</h1>
+          <p>Di Website Poliklinik Universitas Negeri Malang</p>
+        </div>
       </div>
       <div class="carousel-item">
         <img src="asset/img/img2.jpg" style="width: 100%;
-  height: auto" alt="">
+  height: auto; filter: brightness(75%)" alt="">
+        <div class="carousel-caption" style="bottom: 200px">
+          <h1>Selamat Datang</h1>
+          <p>Di Website Poliklinik Universitas Negeri Malang</p>
+        </div>
       </div>
       <div class="carousel-item">
         <img src="asset/img/img3.jpg" style="width: 100%;
-  height: auto" alt="">
+  height: auto; filter: brightness(75%)" alt="">
+        <div class="carousel-caption" style="bottom: 200px">
+          <h1>Selamat Datang</h1>
+          <p>Di Website Poliklinik Universitas Negeri Malang</p>
+        </div>
       </div>
     </div>
 
@@ -201,26 +253,26 @@
   <?php
     else:
   ?>
-    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 rgba(53,64,90,.2);">
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 #00ACDF;">
       <div class="text-white text-center"><br>
         <h2 style="color: black">Specialty</h2>
           <hr>
-        <div class="row" style="background-color: white; color: black">
-          <div class="col-lg-4 col-md-6 text-center">
+        <div class="row" style="color: #00ACDF">
+          <div class="col-lg-4 col-md-6 text-center skills-icon">
             <div class="mt-5">
               <i class="fas fa-4x fa-stethoscope mb-4"></i>
               <h3 class="h4 mb-2">Umum</h3>
               <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan penyakit dan pemeriksaan kesehatan.</p>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 text-center">
+          <div class="col-lg-4 col-md-6 text-center skills-icon">
             <div class="mt-5">
               <i class="fas fa-4x fa-tooth mb-4"></i>
               <h3 class="h4 mb-2">Gigi</h3>
               <p class="text-muted mb-0">Hadir untuk menangani keluhan seputar gigi dan akan dan pemeriksaan gigi.</p>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 text-center">
+          <div class="col-lg-4 col-md-6 text-center skills-icon">
             <div class="mt-5">
               <i class="fas fa-4x fa-baby mb-4"></i>
               <h3 class="h4 mb-2">Ibu dan Anak</h3>
@@ -249,7 +301,7 @@
           <div class="text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">People's Talk</h4>
+                <h4 class="text-poli">People's Talk</h4>
                 <p class="mb-0 text-black-50">Pelayanan sangat baik dan cepat. Tempatnya juga bersih. Tidak ada biaya bagi warga UM. Namun, harus memiliki kartu anggota terlebih dahulu sebelum berobat. </p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
@@ -263,7 +315,7 @@
       <div class="container" style="width: 50%">
         <div class=" text-center">
           <h2>Happiness is the highest form of health.</h2>
-          <p>- Dalai Lama -</p>
+          <p class="text-poli">- Dalai Lama -</p>
         </div>
       </div>
 
@@ -278,7 +330,7 @@
           <div class="bg-black text-center h-100 project">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">The Doctor</h4>
+                <h4 class="text-poli">The Doctor</h4>
                 <p class="mb-0 text-black-50">"Kami selalu berupaya dalam memberikan pelayanan terbaik bagi masyarakat, baik dalam pemeriksaan maupun perawatan. Sejak lama, kesehatan masyarakat menjadi tujuan utama kami. Karena seperti kata pepatah, 'Mens sana in corpore sano.'"</p>
                 <hr class="d-none d-lg-block mb-0 ml-0">
               </div>
@@ -298,7 +350,7 @@
           <div class="text-center h-100">
             <div class="d-flex h-100">
               <div class="project-text w-100 my-auto text-center text-lg-left">
-                <h4 class="text-black">About Poliklinik UM</h4>
+                <h4 class="text-poli">About Poliklinik UM</h4>
                 <p class="mb-0 text-black-50">Poliklinik UM merupakan salah satu fasilitas yang ada di Universitas Negeri Malang yang bergerak di bidang kesehatan. Fasilitas ini dapat diakses oleh seluruh warga UM secara gratis tanpa dipungut biaya apapun. Poliklinik dapat ditemukan di sebelah utara Graha Rektorat UM.</p>
                 <hr class="d-none d-lg-block mb-0 mr-0">
               </div>
@@ -314,17 +366,17 @@
   <br><br><br>
 
       <div class="container" style="width: 50%">
-        <div class=" text-center">
+        <div class="text-center">
           <h3>Register Now</h3>
           <p>Daftar terlebih dahulu untuk mendapatkan kartu anggota dan melakukan reservasi secara online!</p>
-          <button class="btn" style="background-color: black; color: white">Register</button>
+          <button class="btn btn-poli">Register</button>
         </div>
       </div>
 
       <br><br><br>
 
       <!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4 bg-dark">
+<footer class="page-footer font-small mdb-color pt-4" style="background-color: #00ACDF">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left text-white">
@@ -345,10 +397,10 @@
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">Facility</h6>
         <p>
-          <a href="#!">Services</a>
+          <a href="#!" class="text-white">Services</a>
         </p>
         <p>
-          <a href="#!">Help</a>
+          <a href="#!" class="text-white">Help</a>
         </p>
         
       </div>
@@ -360,10 +412,10 @@
       <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">links</h6>
         <p>
-          <a href="#!">Register</a>
+          <a href="#!" class="text-white">Register</a>
         </p>
         <p>
-          <a href="#!">Login</a>
+          <a href="#!" class="text-white">Login</a>
         </p>
         
       </div>
@@ -387,7 +439,7 @@
     </div>
     <!-- Footer links -->
 
-    <hr style="background-color: grey">
+    <hr style="background-color: black">
 
     <!-- Grid row -->
     <div class="row d-flex align-items-center">
