@@ -216,8 +216,13 @@
 
     <!-- Main -->
     <div class="container roboto-light text-otherblue">
-        <h3>Admin page</h3>
         <div class="p-4"></div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Admin page</h1>
+                <p class="lead">This is a admin page, you can manage this web app.</p>
+            </div>
+        </div> 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Edit profile</a>
