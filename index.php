@@ -295,7 +295,7 @@
     <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white">
       <div class="row justify-content-center">
         <div class="col-lg-6">
-          <img class="img-fluid" src="asset/img/img1.jpg" alt="">
+          <img class="img-fluid" src="asset/img/people.jpg" alt="">
         </div>
         <div class="col-lg-6 order-lg-first">
           <div class="text-center h-100 project">
@@ -324,7 +324,7 @@
       <!-- Project One Row -->
       <div class="row justify-content-center mb-5 mb-lg-0">
         <div class="col-lg-6">
-          <img class="img-fluid" src="asset/img/img1.jpg" alt="">
+          <img class="img-fluid" src="asset/img/doctor.jpg" alt="">
         </div>
         <div class="col-lg-6">
           <div class="bg-black text-center h-100 project">
@@ -369,7 +369,7 @@
         <div class="text-center">
           <h3>Register Now</h3>
           <p>Daftar terlebih dahulu untuk mendapatkan kartu anggota dan melakukan reservasi secara online!</p>
-          <button class="btn btn-poli">Register</button>
+          <button class="btn btn-poli" style="border-color: #00ACDF">Register</button>
         </div>
       </div>
 
