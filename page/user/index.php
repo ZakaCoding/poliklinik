@@ -40,6 +40,7 @@
     // Data disini bray >>
     // get data from database
     $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
+    $data = $mysqli->query("SELECT * FROM reservasi WHERE user = '". $_SESSION['user'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -123,6 +124,43 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.css">
     <!-- Sweet alert 2 -->
    <script src="<?= BASE_URL ?>vendor/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+   <style>
+    /* Modal Header */
+    .modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+    }
+
+    /* Modal Body */
+    .modal-body {padding: 2px 16px;}
+
+    /* Modal Footer */
+    .modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+    }
+
+    /* Modal Content */
+    .modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+    }   
+   </style>
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
@@ -322,26 +360,7 @@
                                 <button id="button" type="submit" class="btn btn-outline-success float-right">Save Changes</button>
                             </div>
                         </form>
-                    </div>
-                    <!-- Modal -->
-                    <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Save Changes</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>>
                     <div class="p-2"></div>
                     <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
@@ -360,8 +379,47 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php
+                    if($data->num_rows > 0)
+                    {
+                        // Fetch to array data
+                        $i = 1;
+                        while ($data = $data->fetch_assoc()) {
+                            ?>
+                                <tr>
+                                    <td><?=$i;?><td><?=$data['complaints'];?>
+                                    <td><?=$data['poli'];?>
+                                    <td><?=$data['tanggal_reservasi'];?>
+                                    <td><button onclick="">Update</button>
+                                    </td>
+                                </tr>
+                            <?php
+                            $i++;
+                        }
+                        endwhile;
+                    endif;
+                    ?>
                     </tbody>   
                     </table>
+                </div>
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                    <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Edit Reservasi</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="<?=BASE_URL?>function/f_reservasi.php" method="post">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
