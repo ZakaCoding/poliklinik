@@ -216,8 +216,13 @@
 
     <!-- Main -->
     <div class="container roboto-light text-otherblue">
-        <h3>Admin page</h3>
         <div class="p-4"></div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Admin page</h1>
+                <p class="lead">This is a admin page, you can manage this web app.</p>
+            </div>
+        </div> 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Edit profile</a>
@@ -236,7 +241,7 @@
                         <hr>
                         <!-- spacer -->
                         <div class="p-2"></div>
-                        <form action="<?= BASE_URL ?>function/f_update.php" method="post">
+                        <form action="<?= BASE_URL ?>" method="post">
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
@@ -319,7 +324,7 @@
                         <hr>
                         <!-- spacer -->
                         <div class="p-2"></div>
-                        <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
+                        <form action="<?= BASE_URL ?>" method="post">
                             <div class="form-group row">
                                 <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
