@@ -241,7 +241,7 @@
                         <hr>
                         <!-- spacer -->
                         <div class="p-2"></div>
-                        <form action="<?= BASE_URL ?>function/f_update.php" method="post">
+                        <form action="<?= BASE_URL ?>" method="post">
                             <div class="form-group row">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-10">
@@ -324,7 +324,7 @@
                         <hr>
                         <!-- spacer -->
                         <div class="p-2"></div>
-                        <form action="<?= BASE_URL ?>function/f_update2.php" method="post">
+                        <form action="<?= BASE_URL ?>" method="post">
                             <div class="form-group row">
                                 <label for="inputCurr" class="col-sm-2 col-form-label">Current Password</label>
                                 <div class="col-sm-10">
