@@ -40,7 +40,7 @@
     // Data disini bray >>
     // get data from database
     $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
-    $data = $mysqli->query("SELECT * FROM reservasi WHERE user = '". $_SESSION['user'] . "'");
+
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -107,6 +107,18 @@
                 # code...
                 break;
         }
+    }
+
+    //data tabel reservasi
+    $data = $mysqli->query("SELECT * FROM tbl_reservasi WHERE user_id 
+                            IN (SELECT user_id FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "')");
+    $i = 0;
+    if($data->num_rows > 0)
+    {
+        // Fetch to array data
+        $data = $data->fetch_assoc();
+        $i++;
+        
     }
 ?>
 <!DOCTYPE html>
@@ -372,33 +384,21 @@
                     <thead>
                         <tr>
                         <th>No</th>
-                        <th>Keluhan</th>
+                        <th>ID Reservasi</th>
                         <th>Poli yang Dituju</th>
                         <th>Tanggal Reservasi</th>
                         <th>Edit Reservasi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php
-                    if($data->num_rows > 0)
-                    {
-                        // Fetch to array data
-                        $i = 1;
-                        while ($data = $data->fetch_assoc()) {
-                            ?>
-                                <tr>
-                                    <td><?=$i;?><td><?=$data['complaints'];?>
-                                    <td><?=$data['poli'];?>
-                                    <td><?=$data['tanggal_reservasi'];?>
-                                    <td><button onclick="">Update</button>
-                                    </td>
-                                </tr>
-                            <?php
-                            $i++;
-                        }
-                        endwhile;
-                    endif;
-                    ?>
+                    <tr>
+                        <td><?=$i;?>
+                        <td><?=$data['reservation_id'];?>
+                        <td><?=$data['poli_category'];?>
+                        <td><?=$data['reservased_at'];?>
+                        <td><button onclick="myModal">Update</button>
+                        </td>
+                    </tr>
                     </tbody>   
                     </table>
                 </div>
