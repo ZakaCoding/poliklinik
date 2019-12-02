@@ -40,7 +40,6 @@
     // Data disini bray >>
     // get data from database
     $admin = $mysqli->query("SELECT * FROM admins WHERE remember_token = '". $_SESSION['admin']['token'] . "'");
-    $data = $mysqli->query("SELECT * FROM reservasi WHERE user = '". $_SESSION['admin'] . "'");
     if($admin->num_rows > 0)
     {
         // Fetch to array data
@@ -190,8 +189,8 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 <?php
-                if(isset($_SESSION['user'])) :
-                  if($_SESSION['user']['login'] == true):
+                if(isset($_SESSION['admin'])) :
+                  if($_SESSION['admin']['login'] == true):
                 ?>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -228,7 +227,7 @@
                 <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Edit profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-reservation-tab" data-toggle="pill" href="#pills-reservation" role="tab" aria-controls="pills-reservation" aria-selected="false">Edit reservation</a>
+                <a class="nav-link" id="pills-users-tab" data-toggle="pill" href="#pills-users" role="tab" aria-controls="pills-users" aria-selected="false">Data users</a>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -288,7 +287,7 @@
                         <hr>
                         <!-- spacer -->
                         <div class="p-2"></div>
-                        <p>Enable or disable login to User page from your social login.</p>
+                        <p>Enable or disable login to Admin page from your social login.</p>
                         <div class="p-2"></div>
                         <div class="clearfix">
                             <div class="float-left">
@@ -371,62 +370,18 @@
                     <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="pills-reservation" role="tabpanel" aria-labelledby="pills-reservation-tab">
-                <h2 class="roboto-regular p-2">Edit Reservation</h2>
-                <div class="row p-4">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                        <th>No</th>
-                        <th>Keluhan</th>
-                        <th>Poli yang Dituju</th>
-                        <th>Tanggal Reservasi</th>
-                        <th>Edit Reservasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    if($data->num_rows > 0) :
-                        // Fetch to array data
-                        $i = 1;
-                        while ($data = $data->fetch_assoc()) :
-                            ?>
-                                <tr>
-                                    <td><?=$i;?><td><?=$data['complaints'];?>
-                                    <td><?=$data['poli'];?>
-                                    <td><?=$data['tanggal_reservasi'];?>
-                                    <td><button onclick="">Update</button>
-                                    </td>
-                                </tr>
-                            <?php
-                            $i++;
-                        
-                        endwhile;
-                    endif;
-                    ?>
-                    </tbody>   
-                    </table>
-                </div>
-                <!-- Modal -->
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                    <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Reservasi</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="<?=BASE_URL?>function/f_reservasi.php" method="post">
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--
+                NOTE* 
+                This page useing templating system 
+                create all pill page on another file like _list_users.php
+                and call on this page
+             -->
+            <!-- Pills page -->
+                <!-- Pill data users -->
+                <?php include "_list_users.php"; ?>
+            <!-- End pills page -->
+
+            
         </div>
     </div>
 
