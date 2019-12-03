@@ -17,5 +17,6 @@ ALTER TABLE tbl_reservasi
   ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
 -- Add new column
 ALTER TABLE tbl_reservasi
-  ADD status ENUM ('confirmed','unconfirmed') COLLATE utf8mb4_unicode_ci NOT NULL 
+  ADD `status` ENUM ('confirmed','unconfirmed') COLLATE utf8mb4_unicode_ci NOT NULL,
+  ADD `ticket` VARCHAR(5) COLLATE utf8mb4_unicode_ci NOT NULL
   AFTER queue;
