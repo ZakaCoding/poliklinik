@@ -379,6 +379,7 @@
             <!-- Pills page -->
                 <!-- Pill data users -->
                 <?php include "_list_users.php"; ?>
+                <?php include "_reservation.php"; ?>
             <!-- End pills page -->
 
             
