@@ -1,8 +1,8 @@
 <!-- Call this on admin page -->
-<div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-reservation-tab">
+<div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
     <h2 class="roboto-regular p-2">Data users</h2>
-    <div class="row p-4">
-    <div class="col bg-white border-rounded-md  p-3">
+    <div class="row p-4"></div>
+    <div class="col bg-white border-rounded-md p-3">
         <table class="table table-striped">
             <thead>
                 <tr>
