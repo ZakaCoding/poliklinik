@@ -1,7 +1,6 @@
 <?php 
     include_once("../../config/config.php");
     session_start();
-
     // check user has login or nah
     if(isset($_SESSION['user']))
     {   
@@ -40,18 +39,16 @@
     // Data disini bray >>
     // get data from database
     $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
-
+    $data = $mysqli->query("SELECT * FROM reservasi WHERE user = '". $_SESSION['user'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
         $user = $user->fetch_assoc();
-
         // How to use this data
         // like this example.
         // you want data email then code is
         // $user['email'] --> output program "zakanoor@outlook.co.id"
     }
-
     /**
      * System Error handling
      */
@@ -108,18 +105,6 @@
                 break;
         }
     }
-
-    //data tabel reservasi
-    $data = $mysqli->query("SELECT * FROM tbl_reservasi WHERE user_id 
-                            IN (SELECT user_id FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "')");
-    $i = 0;
-    if($data->num_rows > 0)
-    {
-        // Fetch to array data
-        $data = $data->fetch_assoc();
-        $i++;
-        
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -143,17 +128,14 @@
     background-color: #5cb85c;
     color: white;
     }
-
     /* Modal Body */
     .modal-body {padding: 2px 16px;}
-
     /* Modal Footer */
     .modal-footer {
     padding: 2px 16px;
     background-color: #5cb85c;
     color: white;
     }
-
     /* Modal Content */
     .modal-content {
     position: relative;
@@ -166,7 +148,6 @@
     animation-name: animatetop;
     animation-duration: 0.4s
     }
-
     /* Add Animation */
     @keyframes animatetop {
     from {top: -300px; opacity: 0}
@@ -372,7 +353,7 @@
                                 <button id="button" type="submit" class="btn btn-outline-success float-right">Save Changes</button>
                             </div>
                         </form>
-                    </div>>
+                    </div>
                     <div class="p-2"></div>
                     <div class="col bg-white border-rounded-md  p-3">Column</div>
                 </div>
@@ -384,21 +365,13 @@
                     <thead>
                         <tr>
                         <th>No</th>
-                        <th>ID Reservasi</th>
+                        <th>Keluhan</th>
                         <th>Poli yang Dituju</th>
                         <th>Tanggal Reservasi</th>
                         <th>Edit Reservasi</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><?=$i;?>
-                        <td><?=$data['reservation_id'];?>
-                        <td><?=$data['poli_category'];?>
-                        <td><?=$data['reservased_at'];?>
-                        <td><button onclick="myModal">Update</button>
-                        </td>
-                    </tr>
                     </tbody>   
                     </table>
                 </div>
