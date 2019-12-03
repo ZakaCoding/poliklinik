@@ -203,35 +203,42 @@
                     <div class="float-right align-middle">
                         <h6 class="roboto-light">Sisa antrian hari ini&nbsp;<i class="fas fa-question-circle text-success"></i></h6>
                         <div class="roboto-bold number">
-                        100
+                            <?php
+                                // get data from database
+                                $sql = $mysqli->query("SELECT * FROM `queue`");
+                                $data = $sql->fetch_assoc() ;
+                                echo $data['queue'];
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Content here -->
             <div class="card-body p-4">
-                <form>
+                <form action="<?= BASE_URL ?>function/f_generate_reservation.php" method="post">
                     <div class="form-group">
-                        <label for="exampleInputEmail1" class="text-otherblue card-title"><i class="fas fa-user-md text-pink"></i>&nbsp;Masukan keluhannmu</label>
-                        <input type="email" class="form-control border-softblue border-rounded-md" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text text-muted text-softblue">* Masukan keluhannmu supaya dokter bisa memahami gejala penyakit kamu.</small>
+                        <label for="complaintInput" class="text-otherblue card-title"><i class="fas fa-user-md text-pink"></i>&nbsp;Masukan keluhannmu</label>
+                        <textarea class="form-control border-softblue border-rounded-md" name="complaint" style="height:80px; max-height:120px;" id="complaintInput" aria-describedby="complainHelp"></textarea>
+                        <small id="complainHelp" class="form-text text-muted text-softblue">* Masukan keluhannmu supaya dokter bisa memahami gejala penyakit kamu.</small>
                     </div>
                     <hr>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputDate">Tanggal check up</label>
-                            <input type="date" class="form-control border-softblue dateselect" required="required" id="inputDate">
+                            <input type="date" class="form-control border-softblue dateselect" name="date" required="required" id="inputDate">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputState">Poli</label>
-                            <select id="inputState" class="form-control border-softblue">
+                            <label for="inputPoli"><span class="text-danger">*</span>Poli</label>
+                            <select id="inputPoli" class="form-control border-softblue" name="poliCategory" required>
                                 <option selected>Choose...</option>
-                                <option>...</option>
+                                <option>Poli Umum</option>
+                                <option>Poli Gigi</option>
+                                <option>Poli Ibu dan Anak</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control border-softblue" id="inputZip">
+                            <label for="inputZip">Jenis pengunjung</label>
+                            <input type="text" class="form-control border-softblue" name="typeUser" id="inputZip">
                         </div>
                     </div>
                     <div class="clearfix">
