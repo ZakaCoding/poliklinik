@@ -199,7 +199,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Profile</a>
                     <a class="dropdown-item" href="#">Manage Reservation</a>
-                    <a class="dropdown-item" href="<?= BASE_URL ?>/function/logout.php">Logout</a>
+                    <a class="dropdown-item" href="<?= BASE_URL ?>function/logout_admin.php">Logout</a>
                     </div>
                 </div>
 
