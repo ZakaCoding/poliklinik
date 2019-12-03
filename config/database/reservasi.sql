@@ -11,3 +11,11 @@ CREATE TABLE `tbl_reservasi` (
   PRIMARY KEY `reservation_id` (`reservation_id`),
   UNIQUE KEY `id_reservased_unique` (`reservation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Add relation
+ALTER TABLE tbl_reservasi
+  ADD FOREIGN KEY (user_id) REFERENCES users(user_id);
+-- Add new column
+ALTER TABLE tbl_reservasi
+  ADD status ENUM ('confirmed','unconfirmed') COLLATE utf8mb4_unicode_ci NOT NULL 
+  AFTER queue;
