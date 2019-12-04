@@ -218,7 +218,7 @@
                 <form action="<?= BASE_URL ?>function/f_generate_reservation.php" method="post">
                     <div class="form-group">
                         <label for="complaintInput" class="text-otherblue card-title"><i class="fas fa-user-md text-pink"></i>&nbsp;Masukan keluhannmu</label>
-                        <textarea class="form-control border-softblue border-rounded-md" name="complaint" style="height:80px; max-height:120px;" id="complaintInput" aria-describedby="complainHelp"></textarea>
+                        <textarea class="form-control border-softblue border-rounded-md" name="complaint" style="height:80px; max-height:120px;" id="complaintInput" aria-describedby="complainHelp" required></textarea>
                         <small id="complainHelp" class="form-text text-muted text-softblue">* Masukan keluhannmu supaya dokter bisa memahami gejala penyakit kamu.</small>
                     </div>
                     <hr>
@@ -238,7 +238,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="inputZip">Jenis pengunjung</label>
-                            <input type="text" class="form-control border-softblue" name="typeUser" id="inputZip">
+                            <input type="text" class="form-control border-softblue" name="typeUser" id="inputZip" required>
                         </div>
                     </div>
                     <div class="clearfix">
@@ -505,6 +505,9 @@
     <script src="<?= BASE_URL ?>vendor/js/bootstrap.min.js"></script>
     
     <!-- Javascript HERE -->
-    
+    <script type="text/javascript">
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("inputDate").setAttribute('min', today);
+    </script>
 </body>
 </html>
