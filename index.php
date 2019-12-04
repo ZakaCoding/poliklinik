@@ -204,10 +204,11 @@
                         <h6 class="roboto-light">Sisa antrian hari ini&nbsp;<i class="fas fa-question-circle text-success"></i></h6>
                         <div class="roboto-bold number">
                             <?php
-                                // get data from database
-                                $sql = $mysqli->query("SELECT * FROM `queue`");
-                                $data = $sql->fetch_assoc() ;
-                                echo $data['queue'];
+                                $queue = $mysqli->query("SELECT * FROM `queue`");
+                                $queue = $queue->fetch_assoc();
+                                $queue = $queue['queue'];
+
+                                echo $queue;
                             ?>
                         </div>
                     </div>
