@@ -131,6 +131,18 @@
 .d-flex {
   display: inline-flex;
 }
+.font-32 {
+  font-size: 42pt;
+}
+.sub-main {
+  width: 100vh;
+}
+.w-300 {
+  width: 300px;
+}
+.modal-lg {
+    max-width: 60% !important;
+}
 
 /**
 / Styling User page
@@ -223,3 +235,28 @@
   font-size: 18pt;
 }
 
+/* List reserve */
+.reservation-table {
+  width: 100%;
+  border-left: 2px solid grey;
+  padding-left: 10px;
+}
+.border-right {
+  border-right: 1px solid whitesmoke;
+  height: 75px;;
+}
+.date-reservation {
+  margin: 0px;
+  padding: 0px;
+  display: inline;
+}
+.complaint-msg {
+  background-color: honeydew;
+  border:0px;
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #f7f7f7 !important;
+  color: black !important;
+}

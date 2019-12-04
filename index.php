@@ -417,6 +417,9 @@
         <p>
           <a href="#!" class="text-white">Login</a>
         </p>
+        <p>
+          <a href="<?= BASE_URL ?>developers.php" class="text-white">Devloper</a>
+        </p>
         
       </div>
 

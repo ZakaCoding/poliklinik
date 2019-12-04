@@ -226,7 +226,7 @@
                 <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Edit profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-reservation-tab" data-toggle="pill" href="#pills-reservation" role="tab" aria-controls="pills-reservation" aria-selected="false">Edit reservation</a>
+                <a class="nav-link" id="pills-reservation-tab" data-toggle="pill" href="#pills-reservation" role="tab" aria-controls="pills-reservation" aria-selected="false">Manage reservation</a>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -234,7 +234,7 @@
                 <!-- Error Handling php -->
                 <h2 class="roboto-regular p-2">Edit Profile</h2>
                 <div class="row p-4">
-                    <div class="col bg-white border-rounded-md  p-3">
+                    <div class="col bg-white border-rounded-md p-3">
                         <h4 class="form-title">Update Your Name or Email</h4>
                         <hr>
                         <!-- spacer -->
@@ -256,7 +256,7 @@
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
                                     <small id="emailHelp" class="form-text text-muted">    
-                                        * Change with your active email and dont forget to verification.
+                                        * Change with your active email and dont forget for verification.
                                     </small>
 
                                     <!-- Alert if user has change their email -->
@@ -370,90 +370,16 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-reservation" role="tabpanel" aria-labelledby="pills-reservation-tab">
-                <h2 class="roboto-regular p-2">Edit Reservation</h2>
+                <h2 class="roboto-regular p-2">Manage Reservation</h2>
                 <div class="row p-4">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                        <th>No</th>
-                        <th>Keluhan</th>
-                        <th>Poli yang Dituju</th>
-                        <th>Tanggal Reservasi</th>
-                        <th>Edit Reservasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td><?=$i;?>
-                        <td><?=$data['reservation_id'];?>
-                        <td><?=$data['poli_category'];?>
-                        <td><?=$data['reservased_at'];?>
-                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update</button>
-                        </td>
-                    </tr>
-                    </tbody>   
-                    </table>
-                </div>
-                <!-- Modal -->
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
-                    <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Edit Reservasi</h4>
-                            </div>
-                            <div class="modal-body">
-                                <form action="<?=BASE_URL?>function/f_reservasi.php" method="post">
-                                <div class="form-group row">
-                                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control border-softblue <?= $invalid_name ?>" name="name" id="inputName" value="<?= $user['name'] ?>">
-                                        <div class="invalid-feedback">
-                                        <?= $message; ?>
-                                    </div>                                                          
-                                </div>
-                            </div>
-                            <!-- spacer -->
-                            <div class="p-2"></div>
-                            <div class="form-group row">
-                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
-                                    <small id="emailHelp" class="form-text text-muted">    
-                                        * Change with your active email and dont forget to verification.
-                                    </small>
-
-                                    <!-- Alert if user has change their email -->
-                                    <?php
-                                        if($_SESSION['user']['email'] != $user['email']) :
-                                    ?>
-                                        <div class="p-1"></div>
-                                        <div class="alert alert-primary">
-                                            Your email has change. Please confirm your email so you can login again.
-                                        </div>
-                                    <?php
-                                        endif;
-                                    ?>
-
-                                </div>
-                            </div>                    
-                            <!-- spacer -->
-                            <div class="p-2"></div>
-                            <div class="clearfix">
-                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
-                            </div>                                        
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
+                <?php include_once '_list_reserve.php'; ?>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="container p-4">Copyright &copy; 2019 Poliklinik UM</footer>
 
     <!-- Flash message succes or failed when update data -->
     <?php

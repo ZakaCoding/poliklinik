@@ -76,7 +76,11 @@
 
     if($email != $_SESSION['user']['email'])
     {
-        $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `email_verified_at` = NULL, `updated_at` = NOW() WHERE nim =". $user['nim']);
+        // Create Token
+        $token  = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+        $token  = str_shuffle($token);
+        $token  = substr($token,0,32);
+        $mysqli->query("UPDATE users SET `name` = '$name', `email` = '$email', `email_verified_at` = NULL, `remember_token` = '$token', `updated_at` = NOW() WHERE nim =". $user['nim']);
     }
     else
     {
@@ -85,12 +89,62 @@
 
     if($mysqli->affected_rows > 0)
     {
-        // Redirect with success
-        $_SESSION['flashMessage'] = [
-            'status' => "Success",
-            'message' => "Your data has been change."
-        ];
-        header('location: '.BASE_URL.'page/user');
+
+        /*  This code for send email verification
+        *   Email verification use PHPMailer, it's open source code form Developer
+        *   With GPL License.
+        */
+
+        // Make object from PHPMailer
+        $mail = new PHPMailer(true);
+
+        // Server Setting for send mail
+        $mail->isSMTP(true);
+        $mail->SMTPDebug = 1;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'toor.env@gmail.com';
+        $mail->Password = 'kze-j8sgg-7cd81f88';
+        // Password is secret. dont tell anybody ONLY DEVELOPER to use
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        // Receipments
+        $mail->setFrom('donot-reply@poliklinik.um.ac.id', 'Developer');
+        $mail->addAddress($email,$usrname);
+
+        // Content sent
+        $link = BASE_URL."page/verify-account.php?email=$email&token=$token";
+        // Link for AccountVerify
+        $mail->isHTML(true);
+        $mail->Subject = "Confirm Email change from your account";
+
+        /*
+        | this function for render email
+        | cz if use file_get_contents, system can't parsing data
+        | to mail.php
+        */
+        function render_mail($name, $mail, $links)
+        {
+            ob_start();
+            include "../page/mail_account_change.php";
+            return ob_get_contents();
+        }
+
+        $mail->Body = render_mail($name, $email, $link);
+        if($mail->Send())        
+        {
+            // Redirect with success
+            $_SESSION['flashMessage'] = [
+                'status' => "Success",
+                'message' => "Your data has been change."
+            ];
+            header('location: '.BASE_URL.'page/user');
+        }
+        else
+        {
+            die("Do something");
+        }
     }
     else
     {

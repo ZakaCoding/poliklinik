@@ -50,8 +50,8 @@
         break;
     }
     // Insert to database
-    $query = "INSERT INTO `tbl_reservasi` (`reservation_id`,`user_id`, `poli_category`,`queue`,`status`,`ticket`,`reservased_at`, `created_at`, `updated_at`) VALUES (".
-    $values .= "'$uniqid',$userId, '$poliCategory', $dataQ, 'confirmed', '$ticket', '$date', NOW(), NOW())";
+    $query = "INSERT INTO `tbl_reservasi` (`reservation_id`,`user_id`, `poli_category`,`queue`, `complaint`,`status`,`ticket`,`reservased_at`, `created_at`, `updated_at`) VALUES (".
+    $values .= "'$uniqid',$userId, '$poliCategory', $dataQ, '$complaint', 'confirmed', '$ticket', '$date', NOW(), NOW())";
 
     // check data success insert
     if($mysqli->query($query))
