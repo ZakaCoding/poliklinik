@@ -1,5 +1,5 @@
 <!-- Call this on admin page -->
-<div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
+<div class="tab-pane fade" id="pills-reserve" role="tabpanel" aria-labelledby="pills-reserve-tab">
     <h2 class="roboto-regular p-2">Data users</h2>
     <div class="row p-4"></div>
     <div class="col bg-white border-rounded-md p-3">
@@ -9,29 +9,29 @@
                 <th scope="col">#</th>
                 <th scope="col">Users Name</th>
                 <th scope="col">NIM</th>
-                <th scope="col">Email</th>
-                <th scope="col">Email Verified</th>
-                <th scope="col">Users Password</th>
+                <th scope="col">Poli</th>
+                <th scope="col">Dibuat Pada</th>
+                <th scope="col">Diperbarui Pada</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Print all data from database -->
                 <?php
-                    $users = $mysqli->query("SELECT `name`, `nim`, `email`,`email_verified_at`,`password` FROM `users`");
+                    $users = $mysqli->query("SELECT * FROM `tbl_reservasi` JOIN `users` ON tbl_reservasi.user_id = users.user_id");
                     // Check data not empty
                     if($users->num_rows > 0) :
-                        // fetch all data to associative array
-                        $num = 1;
+                        // // fetch all data to associative array
+                        // $num = 1;
                         while($userData = $users->fetch_assoc()):
                             
                     ?>
                             <tr>
-                                <th scope="row"><?= $num ?></th>
+                                <th scope="row"><?= $userData['queue'] ?></th>
                                 <td><?= $userData['name'] ?></td>
                                 <td><?= $userData['nim'] ?></td>
-                                <td><?= $userData['email'] ?></td>
-                                <td><?= $userData['email_verified_at'] ?></td>
-                                <td>Secret</td>
+                                <td><?= $userData['poli_category'] ?></td>
+                                <td><?= $userData['created_at'] ?></td>
+                                <td><?= $userData['updated_at'] ?></td>
                             </tr>
                 <?php
                             $num++;
