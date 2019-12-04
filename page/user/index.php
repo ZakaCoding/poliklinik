@@ -39,7 +39,6 @@
     // Data disini bray >>
     // get data from database
     $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
-    $data = $mysqli->query("SELECT * FROM reservasi WHERE user = '". $_SESSION['user'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -104,6 +103,18 @@
                 # code...
                 break;
         }
+    }
+    $data = $mysqli->query("SELECT * FROM tbl_reservasi WHERE user_id IN (SELECT user_id FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "')");
+    if($data->num_rows > 0)
+    {
+        // Fetch to array data
+        $data = $data->fetch_assoc();
+        // How to use this data
+        // like this example.
+        // you want data email then code is
+        // $user['email'] --> output program "zakanoor@outlook.co.id"
+        // For numbering
+        $i++;
     }
 ?>
 <!DOCTYPE html>
@@ -372,6 +383,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td><?=$i;?>
+                        <td><?=$data['reservation_id'];?>
+                        <td><?=$data['poli_category'];?>
+                        <td><?=$data['reservased_at'];?>
+                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update</button>
+                        </td>
+                    </tr>
                     </tbody>   
                     </table>
                 </div>
@@ -386,6 +405,44 @@
                             </div>
                             <div class="modal-body">
                                 <form action="<?=BASE_URL?>function/f_reservasi.php" method="post">
+                                <div class="form-group row">
+                                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control border-softblue <?= $invalid_name ?>" name="name" id="inputName" value="<?= $user['name'] ?>">
+                                        <div class="invalid-feedback">
+                                        <?= $message; ?>
+                                    </div>                                                          
+                                </div>
+                            </div>
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control border-softblue" aria-describedby="emailHelp" name="email" id="inputEmail" value="<?= $user['email'] ?>">
+                                    <small id="emailHelp" class="form-text text-muted">    
+                                        * Change with your active email and dont forget to verification.
+                                    </small>
+
+                                    <!-- Alert if user has change their email -->
+                                    <?php
+                                        if($_SESSION['user']['email'] != $user['email']) :
+                                    ?>
+                                        <div class="p-1"></div>
+                                        <div class="alert alert-primary">
+                                            Your email has change. Please confirm your email so you can login again.
+                                        </div>
+                                    <?php
+                                        endif;
+                                    ?>
+
+                                </div>
+                            </div>                    
+                            <!-- spacer -->
+                            <div class="p-2"></div>
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-outline-success float-right">Save Changes</button>
+                            </div>                                        
                                 </form>
                             </div>
                             <div class="modal-footer">
