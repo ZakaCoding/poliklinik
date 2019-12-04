@@ -1,0 +1,1 @@
+php -f C:\www\html\poliklinik_um\config\crownjob\update_queue.php
