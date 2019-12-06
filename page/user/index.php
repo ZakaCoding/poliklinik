@@ -9,7 +9,7 @@
         {
             // Then check all data session is match
             // die($_SESSION['user']['email']);
-            $query = $mysqli->query("SELECT * FROM `users` WHERE remember_token = '". $_SESSION['user']['token'] ."' LIMIT 1");
+            $query = $mysqli->query("SELECT * FROM `users` WHERE nim = '". $_SESSION['user']['nim'] ."' LIMIT 1");
             if($query->num_rows == 0)
             {
                 // Remove session login
@@ -38,7 +38,7 @@
     
     // Data disini bray >>
     // get data from database
-    $user = $mysqli->query("SELECT * FROM users WHERE remember_token = '". $_SESSION['user']['token'] . "'");
+    $user = $mysqli->query("SELECT * FROM users WHERE nim = '". $_SESSION['user']['nim'] . "'");
     if($user->num_rows > 0)
     {
         // Fetch to array data
@@ -168,7 +168,7 @@
 </head>
 <body class="bg-whatever roboto-regular">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container">
             <a class="navbar-brand" href="<?=BASE_URL ?>">Poliklinik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -366,7 +366,19 @@
                         </form>
                     </div>
                     <div class="p-2"></div>
-                    <div class="col bg-white border-rounded-md  p-3">Column</div>
+                    <div class="col bg-white border-rounded-md  p-3">
+                        <h4 class="form-title">Deactive Your Account</h4>
+                        <hr>
+                        <!-- spacer -->
+                        <!-- <div class="p-2"></div> -->
+                        <p>
+                            You can deactive your account, if you has deactive. your data reservation will keep and you're still cant
+                            get your account for 2 weeks if more than 2 weeks your account 100% delete by system. you cant login.
+                        </p>
+                        <div class="clearfix">
+                            <a id="deactive" href="<?= BASE_URL ?>/function/deactive.php" class="btn btn-outline-success float-right">Deactive Account</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-reservation" role="tabpanel" aria-labelledby="pills-reservation-tab">

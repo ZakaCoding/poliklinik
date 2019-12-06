@@ -4,7 +4,9 @@
 * Use this main.css for styling this website
 *
 */
-
+html, body {
+  scroll-behavior: smooth;
+}
 @font-face {
   font-family: 'Roboto Thin';
   src: url('../asset/font/Roboto-Thin.ttf');

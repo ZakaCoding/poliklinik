@@ -56,15 +56,29 @@
     // check data success insert
     if($mysqli->query($query))
     {
-        echo "Success insert to database";
         // And update queue with commit
         $mysqli->query("UPDATE queue SET `queue` = $dataQ-1");
         $mysqli->query('COMMIT');
+
+        // Redirect with success
+        $_SESSION['flashMessage'] = [
+            'status' => "Success",
+            'message' => "Your data has been change."
+        ];
+        // echo "Success insert to database";
+        header('location:'.BASE_URL);
     }
     else
     {
-        echo "failed ". $mysqli->error;
         $mysqli->query('ROLLBACK');
+        // echo "failed ". $mysqli->error;
+
+        // Redirect with success
+        $_SESSION['flashMessage'] = [
+            'status' => "Failed",
+            'message' => "Failed add reservation. ".$mysqli->error
+        ];
+        header('location:'.BASE_URL);
     }
 
     

@@ -14,6 +14,8 @@
     <!-- main css -->
     <link rel="stylesheet" href="<?= BASE_URL ?>css/main.css">
 
+    <link rel="stylesheet" href="<?= BASE_URL ?>vendor/node_modules/animate.css/animate.min.css">
+
     <!-- Font Awesome Icons -->
     <link href="asset/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -98,13 +100,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbardrop" data-toggle="dropdown">Services</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Reservation</a>
-                                <a class="dropdown-item" href="#">Riwayat</a>
+                                <a class="dropdown-item" href="#widget-reservation">Reservation</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>page/user/index.php?#pills-reservation">Riwayat</a>
                                 <a class="dropdown-item" href="#">Information</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="#">Contact</a>
+                            <a class="nav-link text-white" href="#footer">Contact</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="#">Help</a>
@@ -113,7 +115,9 @@
                     <form class="form-inline mt-2 mt-md-0">
                     <?php
                         if(isset($_SESSION['user'])) :
-                            if($_SESSION['user']['login'] == true):
+                            $sql = $mysqli->query("SELECT remember_token FROM users WHERE email = '".$_SESSION['user']['email']."'");
+                            $data = $sql->fetch_assoc();
+                            if(($_SESSION['user']['login'] == true) && ($_SESSION['user']['token'] == $data['remember_token'])):
                     ?>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -126,6 +130,9 @@
                             </div>
                         </div>
 
+                    <?php else: ?>
+                        <a class="btn btn-poli my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php" style="width: 80px">Login</a>
+                        <a class="text-white" href="<?= BASE_URL ?>/page/auth/register.php">Sign up</a>
                     <?php endif; ?>
                     <?php else: ?>
                         <a class="btn btn-poli my-2 my-sm-0 mr-sm-4" href="<?= BASE_URL ?>/page/auth/login.php" style="width: 80px">Login</a>
@@ -186,13 +193,12 @@
     <!-- if user has login speciality is hidden -->
     <?php
     if(isset($_SESSION['user'])) :
-        if($_SESSION['user']['login']) :
-    endif;
+        if(($_SESSION['user']['login']) && ($_SESSION['user']['token'] == $data['remember_token'])) :
     ?>
 
     <!-- This menu widget if user has login, user can reservation -->
     <div class="container">
-        <div class="card widget-reservation">
+        <div class="card widget-reservation" id="widget-reservation">
             <!-- Header of widget -->
             <div class="card-header text-otherblue bg-whatever">
                 <div class="clearfix">
@@ -254,6 +260,40 @@
     <!-- END menu widget -->
 
     <?php
+    else:
+    ?>
+    <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 #00ACDF;">
+        <div class="text-white text-center"><br>
+            <h2 style="color: black">Specialty</h2>
+            <hr>
+            <div class="row" style="color: #00ACDF">
+                <div class="col-lg-4 col-md-6 text-center poli-icon">
+                    <div class="mt-5">
+                        <i class="fas fa-4x fa-stethoscope mb-4"></i>
+                        <h3 class="h4 mb-2">Umum</h3>
+                        <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan penyakit dan pemeriksaan kesehatan.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center poli-icon">
+                    <div class="mt-5">
+                        <i class="fas fa-4x fa-tooth mb-4"></i>
+                        <h3 class="h4 mb-2">Gigi</h3>
+                        <p class="text-muted mb-0">Hadir untuk menangani keluhan seputar gigi dan akan dan pemeriksaan gigi.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center poli-icon">
+                    <div class="mt-5">
+                        <i class="fas fa-4x fa-baby mb-4"></i>
+                        <h3 class="h4 mb-2">Ibu dan Anak</h3>
+                        <p class="text-muted mb-0">Hadir untuk menangani berbagai keluhan dari ibu dan anak dengan sepenuh hati.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+    <?php
+        endif;
     else:
     ?>
     <div class="container" style="position: relative; bottom: 80px; padding-right: 5%; padding-left: 5%; background-color: white; border-radius: 5px; box-shadow : 0 10px 20px 0 #00ACDF;">
@@ -376,7 +416,7 @@
       <br><br><br>
 
       <!-- Footer -->
-<footer class="page-footer font-small mdb-color pt-4" style="background-color: #00ACDF">
+<footer class="page-footer font-small mdb-color pt-4" id="footer" style="background-color: #00ACDF">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left text-white">
@@ -498,6 +538,36 @@
   </div>
   <!-- Footer Links -->
 
+  <!-- Flash message succes or failed when update data -->
+    <?php
+        if(isset($_SESSION['flashMessage'])) :
+            if($_SESSION['flashMessage']['status'] == 'Success'):
+    ?>
+                <!-- Alert -->
+                <div class="container flash-message">
+                    <div class="alert alert-success alert-dismissible fade show animated bounceInDown" role="alert">
+                        <strong><?= $_SESSION['flashMessage']['status'] ?></strong> <?= $_SESSION['flashMessage']['message'] ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+    <?php
+            elseif($_SESSION['flashMessage']['status'] == 'Failed'):
+    ?>
+                <!-- Alert -->
+                <div class="container flash-message">
+                    <div class="alert alert-danger alert-dismissible fade show animated bounceInDown" role="alert">
+                        <strong><?= $_SESSION['flashMessage']['status'] ?></strong> <?= $_SESSION['flashMessage']['message'] ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+    <?php
+            endif;
+        endif;
+    ?>
 </footer>
 <!-- Footer -->
 
@@ -515,3 +585,7 @@
     </script>
 </body>
 </html>
+
+<?php
+    unset($_SESSION['flashMessage']);
+?>

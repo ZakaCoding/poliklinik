@@ -132,7 +132,7 @@
                                         </button>
                                     </div>
                                 <?php endif; ?>
-                                <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/register.php' ?>">Sign up</a></small>
+                                <!-- <small class="form-text text-muted text-center">Already have an account ? <a href="<?= BASE_URL . 'page/auth/register.php' ?>">Sign up</a></small> -->
                             </div>
                         </form>
                     </div>
